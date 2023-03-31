@@ -13,7 +13,7 @@ const { reviewsModel } = require('./models/')
 const { storesModel } = require('./models/')
 const { usersModel } = require('./models/')
 
-const app = express()
+const app = express() 
 
 //Le decimos a la app de express() que use cors para evitar el error Cross-Domain (XD)
 app.use(cors()) 
