@@ -11,6 +11,10 @@ models.interestsModel.belongsToMany(models.usersModel, {through: 'users_interest
 
 models.usersModel.belongsToMany(models.interestsModel, {through: 'users_interests'})
 
+models.interestsModel.belongsToMany(models.storesModel, {through: 'stores_interests'})
+
+models.storesModel.belongsToMany(models.interestsModel, {through: 'stores_interests'})
+
 models.usersModel.hasMany(models.reviewsModel)
 
 models.storesModel.hasMany(models.reviewsModel)
