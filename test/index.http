@@ -1,0 +1,21 @@
+### Test de registro de usuario
+
+POST http://localhost:3000/api/users HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Juanito",
+    "age": "23",
+    "email": "juanito@gmail.com",
+    "password": "Prueba1234!",
+    "city": "malaga",
+    "interests": ["futbol", "basket"],
+    "accepts_offers": false
+  
+}
+
+###
+
+GET http://localhost:3000/api/users
+
+###

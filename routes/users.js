@@ -26,12 +26,14 @@ const {validatorRegisterUser} = require("../validators/auth")
 const checkRol = require("../middleware/rol")
 const authMiddleware = require("../middleware/session")
 
+const {registerCtrl} = require('../controllers/users')
+
 
 // TODO
 //router.get("/:city")
 
-//TODO: registerUserController
-//router.post("/", validatorRegisterUser, )
+// Registro: POST /api/users 
+router.post("/", validatorRegisterUser, registerCtrl)
 
 //TODO: PUT USER: validator logeado y controller
 //router.put("/:id")
