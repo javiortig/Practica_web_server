@@ -12,7 +12,7 @@ const tokenSign = async (user) => {
         },
         process.env.JWT_SECRET,
         {
-            expiresIn: "2h"
+            expiresIn: "4h"
         }
     )
     return sign
