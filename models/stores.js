@@ -19,7 +19,7 @@ const Store = sequelize.define(
         },
         email:{
             type: DataTypes.STRING,
-            primaryKey: true
+            unique: true
         },
         phone: {
             type: DataTypes.STRING

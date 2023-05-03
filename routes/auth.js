@@ -1,15 +1,19 @@
 const express = require("express")
 const router = express.Router()
 
-const {validatorRegisterUser, validatorRegisterMerchant, validatorLogin} = require("../validators/auth")
-
 const checkRol = require("../middleware/rol")
 const authMiddleware = require("../middleware/session")
 const pruebasMiddleware = require("../middleware/pruebas")
 
-const {loginCtrl, registerUserCtrl, registerMerchantCtrl} = require("../controllers/auth")
+const {validatorRegisterUser, validatorRegisterMerchant, validatorLogin, validatorUpdateMerchant} = require("../validators/auth")
+
+const {loginCtrl, registerUserCtrl, registerMerchantCtrl, updateMerchantCtrl} = require("../controllers/auth")
 
 
+
+/*
+    Estas son las rutas para todos los registros y el login
+*/
 
 // Login: POST http://localhost:3000/api/auth/login
 router.post("/login", validatorLogin, loginCtrl) 
@@ -21,6 +25,9 @@ router.post("/login", validatorLogin, loginCtrl)
     esa store en concreto 
 */
 router.post("/merchants", authMiddleware, checkRol(["admin"]), validatorRegisterMerchant, registerMerchantCtrl)
+
+// Modificar merchant:
+router.put("/merchants/:id", authMiddleware, checkRol(["admin"]), validatorUpdateMerchant, updateMerchantCtrl)
 
 // Registro solo de usuarios: POST /api/auth/users 
 router.post("/users", validatorRegisterUser, registerUserCtrl)

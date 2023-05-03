@@ -31,7 +31,7 @@ const validatorRegisterMerchant = [
 ]
 
 // Cuando el merchant recibe el token dado por el admin, se termina de registrar. Le obliga  a cambiar la contraseña
-const validatorUpdateMerchant = [
+const validatorUpdateWebsite = [
     check("city").exists().notEmpty().isLength( {min:3, max: 100} ),
     check('interests.*').isLength({ min: 1, max: 25 }), // Es la actividad
     check("title").exists().notEmpty().isLength( {min:3, max: 100} ),
@@ -45,9 +45,9 @@ const validatorUpdateMerchant = [
 ]
 
 // El put de Admin a /merchants/?id
-const validatorAdminUpdateMerchant = [
+const validatorUpdateMerchant = [
     check("name").optional().notEmpty().isLength( {min:3, max: 50} ),
-    check("email").optional().notEmpty().isEmail(),
+    //check("email").optional().notEmpty().isEmail(),
     check("phone").optional().notEmpty().isMobilePhone(),
     check("address").optional().notEmpty().matches(/^[a-zA-Z0-9\s.,-]+$/),
     check("cif").optional().notEmpty().matches(/^[A-HJNP-SUVE]{1}\d{7}[0-9A-J]{1}$/),// Expresion regular del CIF
@@ -55,8 +55,6 @@ const validatorAdminUpdateMerchant = [
     check('interests.*').optional().isLength({ min: 1, max: 25 }), // Es la actividad
     check("title").optional().notEmpty().isLength( {min:3, max: 100} ),
     check("summary").optional().notEmpty().isLength( {min:3, max: 100} ),
-    check("texts").optional(),
-    check("photos").optional(),
     (req, res, next) => {
         return validateResults(req, res, next)
     }
@@ -71,4 +69,4 @@ const validatorLogin = [
     }
 ]
 
-module.exports = { validatorRegisterUser, validatorLogin, validatorRegisterMerchant, validatorUpdateMerchant, validatorAdminUpdateMerchant }
+module.exports = { validatorRegisterUser, validatorLogin, validatorRegisterMerchant, validatorUpdateWebsite, validatorUpdateMerchant }

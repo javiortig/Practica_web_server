@@ -124,5 +124,41 @@ const registerMerchantCtrl = async (req, res) => {
 }
 
 
+/**
+ * Registra una store y un usuario merchant
+ * @param {*} req 
+ * @param {*} res 
+ */
+const updateMerchantCtrl = async (req, res) => {
+    try {
+        const {id} = req.params;
+        const {...body} = matchedData(req) //Extrae el id y el resto lo asigna a la constante body
+        const data = await storesModel.findOne({where: {id: id}});
 
-module.exports = { loginCtrl, registerUserCtrl, registerMerchantCtrl }
+        if(!data){
+            handleHttpError(res, "STORE_NOT_EXISTS", 404)
+            return
+        }
+        
+        const update = await data.update(body)
+
+        // Sequelize no te deja actualizar una PK (y con razón) así que simplemente no permito cambiar el email
+        // // Si actualiza el email de la store, tambien debe actualizarse en el usuario del merchant
+        // if(body.email){
+        //     const dataUser = await usersModel.findOne({where: {email: oldEmail}})
+
+        //     dataUser.update({email: body.email})
+
+        //     console.log(dataUser)
+        // }
+
+        res.send(update)    
+    }catch(err){
+        console.log(err) 
+        handleHttpError(res, 'ERROR_UPDATE_MERCHANT')
+    }
+}
+
+
+
+module.exports = { loginCtrl, registerUserCtrl, registerMerchantCtrl, updateMerchantCtrl }
