@@ -22,15 +22,11 @@ const Store = sequelize.define(
             primaryKey: true
         },
         phone: {
-            type: DataTypes.STRING,
-            validate:{
-                min: 8,
-                max: 20
-            }
+            type: DataTypes.STRING
         },
         city:{
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: false
         },
         title:{
             type: DataTypes.STRING,

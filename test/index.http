@@ -1,21 +1,47 @@
-### Test de registro de usuario
+# Testeos de todas las rutas:
 
-POST http://localhost:3000/api/users HTTP/1.1
+### Login de usuario (admin)
+
+POST http://localhost:3000/api/auth/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "Juanito",
+    "email": "admin@gmail.com",
+    "password": "Admin1234!"
+    
+}
+
+### registro de usuario
+
+POST http://localhost:3000/api/auth/users HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Admin",
     "age": "23",
-    "email": "juanito@gmail.com",
-    "password": "Prueba1234!",
-    "city": "malaga",
-    "interests": ["futbol", "basket"],
+    "email": "admin@gmail.com",
+    "password": "Admin1234!!",
+    "city": "Null",
     "accepts_offers": false
   
 }
 
-###
+### Registro de Merchant(store y user con rol merchant)
 
-GET http://localhost:3000/api/users
+POST http://localhost:3000/api/auth/merchants HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsImlhdCI6MTY4MzEyOTg1NCwiZXhwIjoxNjgzMTQ0MjU0fQ.yxU--T_9n8p6Rpe60Zy4wU_JWx-DbeUHK0c-7ey6Y1o
+
+{
+    "store_name": "Wung Store",
+    "username": "wung_store",
+    "email": "wung@gmail.com",
+    "phone": "618123456",
+    "address": "calle la q sea 32",
+    "cif": "B12459786",
+    "password": "Prueba1234!",
+    "city": "Madrid"
+  
+}
 
 ###

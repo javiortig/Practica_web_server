@@ -11,14 +11,20 @@ const authMiddleware = async (req, res, next) => {
 
         // Nos llega la palabra reservada Bearer (es un estándar) y el Token, así que me quedo con la última parte
         const token = req.headers.authorization.split(' ').pop() 
-        //Del token, miramos en Payload (revisar verifyToken de utils/handleJwt)
+
         const dataToken = await verifyToken(token)
-        if(!dataToken._id) {
-            handleHttpError(res, "ERROR_ID_TOKEN", 401)
-            return
+
+        if(!dataToken){
+            handleHttpError(res, "NOT_PAYLOAD_DATA", 401)
+            retrun
+       }
+        
+        const query = {
+            // _id o id 
+            ["id"]: dataToken["id"]
         }
 
-        const user = await usersModel.findById(dataToken._id)
+        const user = await usersModel.findOne(query) // findOne válido para Mongoose y Sequelize
         req.user = user // Inyecto al user en la petición
 
         next()
