@@ -21,12 +21,12 @@
 const express = require("express")
 const router = express.Router()
 
-const {validatorRegisterUser} = require("../validators/auth")
+const {validatorUpdateMerchant, validatorUpdateWebsite, validatorDeleteUser} = require("../validators/users")
 
-const checkRol = require("../middleware/rol")
+const {checkRol} = require("../middleware/rol")
 const authMiddleware = require("../middleware/session")
 
-const {} = require('../controllers/users')
+const {deleteUserCtrl, updateMerchantCtrl} = require('../controllers/users')
 
 
 // TODO
@@ -37,5 +37,11 @@ const {} = require('../controllers/users')
 
 //TODO: DELETE USER: logeado y controller
 //router.delete("/:id")
+
+// Modificar merchant:
+router.put("/merchants/:id", authMiddleware, checkRol(["admin"]), validatorUpdateMerchant, updateMerchantCtrl)
+
+// Borrar un usuario (borrar tanto merchants como usuarios normales)
+router.delete("/users/:id", authMiddleware, validatorDeleteUser, deleteUserCtrl)
 
 module.exports = router

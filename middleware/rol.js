@@ -20,4 +20,4 @@ const checkRol = (roles) => (req, res, next) => { //Doble argumento
     }
 }
 
-module.exports = checkRol
+module.exports = {checkRol}

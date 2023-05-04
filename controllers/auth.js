@@ -13,8 +13,6 @@ const loginCtrl = async (req, res) => {
     try {
         req = matchedData(req)
         const user = await usersModel.findOne({ email: req.email })
-        console.log("User:")
-        console.log(user)
 
         if(!user){
             handleHttpError(res, "USER_NOT_EXISTS", 404)
@@ -53,7 +51,7 @@ const registerUserCtrl = async (req, res) => {
     try {
         req = matchedData(req)
         const password = await encrypt(req.password)
-        const body = {...req, password} 
+        const body = {...req, password, owns_store_id: null} 
         const dataUser = await usersModel.create(body)
 
         // Esto por seguridad, ya no hace falta que viaje la password entonces la quito 
@@ -105,13 +103,18 @@ const registerMerchantCtrl = async (req, res) => {
             city: req.city,
             title: null,
             summary: null,
+            owner_id: dataUser.id
         }
         const storeData = await storesModel.create(storeBody)
+
+        // Falta asignar al user creado su store, hacemos un update:
+
+        const dataUserUpdate = await dataUser.update({owns_store_id: storeData.id})
 
         // Enviamos los datos de ambos
         const data = {
             token: await tokenSign(dataUser),
-            user: dataUser,
+            user: dataUserUpdate,
             store: storeData
         }
 
@@ -124,41 +127,7 @@ const registerMerchantCtrl = async (req, res) => {
 }
 
 
-/**
- * Registra una store y un usuario merchant
- * @param {*} req 
- * @param {*} res 
- */
-const updateMerchantCtrl = async (req, res) => {
-    try {
-        const {id} = req.params;
-        const {...body} = matchedData(req) //Extrae el id y el resto lo asigna a la constante body
-        const data = await storesModel.findOne({where: {id: id}});
-
-        if(!data){
-            handleHttpError(res, "STORE_NOT_EXISTS", 404)
-            return
-        }
-        
-        const update = await data.update(body)
-
-        // Sequelize no te deja actualizar una PK (y con razón) así que simplemente no permito cambiar el email
-        // // Si actualiza el email de la store, tambien debe actualizarse en el usuario del merchant
-        // if(body.email){
-        //     const dataUser = await usersModel.findOne({where: {email: oldEmail}})
-
-        //     dataUser.update({email: body.email})
-
-        //     console.log(dataUser)
-        // }
-
-        res.send(update)    
-    }catch(err){
-        console.log(err) 
-        handleHttpError(res, 'ERROR_UPDATE_MERCHANT')
-    }
-}
 
 
 
-module.exports = { loginCtrl, registerUserCtrl, registerMerchantCtrl, updateMerchantCtrl }
+module.exports = { loginCtrl, registerUserCtrl, registerMerchantCtrl }

@@ -1,11 +1,11 @@
 const express = require("express")
 const router = express.Router()
 
-const checkRol = require("../middleware/rol")
+const {checkRol} = require("../middleware/rol")
 const authMiddleware = require("../middleware/session")
 const pruebasMiddleware = require("../middleware/pruebas")
 
-const {validatorRegisterUser, validatorRegisterMerchant, validatorLogin, validatorUpdateMerchant} = require("../validators/auth")
+const {validatorRegisterUser, validatorRegisterMerchant, validatorLogin} = require("../validators/auth")
 
 const {loginCtrl, registerUserCtrl, registerMerchantCtrl, updateMerchantCtrl} = require("../controllers/auth")
 
@@ -26,10 +26,8 @@ router.post("/login", validatorLogin, loginCtrl)
 */
 router.post("/merchants", authMiddleware, checkRol(["admin"]), validatorRegisterMerchant, registerMerchantCtrl)
 
-// Modificar merchant:
-router.put("/merchants/:id", authMiddleware, checkRol(["admin"]), validatorUpdateMerchant, updateMerchantCtrl)
-
 // Registro solo de usuarios: POST /api/auth/users 
 router.post("/users", validatorRegisterUser, registerUserCtrl)
+
 
 module.exports = router

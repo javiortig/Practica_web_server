@@ -50,6 +50,10 @@ const Store = sequelize.define(
         scoring_count:{ 
             type: DataTypes.INTEGER,
             defaultValue: 0
+        },
+        owner_id:{
+            type:DataTypes.INTEGER,
+            allowNull: false
         }
 
     },

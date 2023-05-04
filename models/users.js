@@ -16,7 +16,6 @@ const User = sequelize.define(
         },
         email: {
             type: DataTypes.STRING,
-            primaryKey: true,
             unique: true
         },
         password:{
@@ -35,6 +34,10 @@ const User = sequelize.define(
         accepts_offers: {
             type: DataTypes.BOOLEAN,
             defaultValue: true
+        },
+        owns_store_id:{ // los usuarios que no sean merchant no tienen stores
+            type:DataTypes.INTEGER,
+            allowNull: true
         }
 
     },
