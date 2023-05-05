@@ -19,12 +19,12 @@ const {loginCtrl, registerUserCtrl, registerMerchantCtrl, updateMerchantCtrl} = 
 router.post("/login", validatorLogin, loginCtrl) 
 
 /* 
-    Registro de merchant y store: POST /api/auth/merchants 
+    POST /api/auth/merchant 
     Registro de usuario merchant y su store: registro para merchants y que solo pueda hacerlo el admin
     Nota: ambos comparten el mismo email, que se usará para que solo ese usuario o los admin puedan modificar
     esa store en concreto 
 */
-router.post("/merchants", authMiddleware, checkRol(["admin"]), validatorRegisterMerchant, registerMerchantCtrl)
+router.post("/merchant", authMiddleware, checkRol(["admin"]), validatorRegisterMerchant, registerMerchantCtrl)
 
 // Registro solo de usuarios: POST /api/auth/users 
 router.post("/users", validatorRegisterUser, registerUserCtrl)

@@ -12,7 +12,8 @@ const {usersModel, storesModel} = require("../models")
 const loginCtrl = async (req, res) => {
     try {
         req = matchedData(req)
-        const user = await usersModel.findOne({ email: req.email })
+        console.log(req)
+        const user = await usersModel.findOne({where: {email: req.email}});
 
         if(!user){
             handleHttpError(res, "USER_NOT_EXISTS", 404)
@@ -21,7 +22,7 @@ const loginCtrl = async (req, res) => {
         
         const hashPassword = user.password;
         const check = await compare(req.password, hashPassword)
-
+        
         if(!check){
             handleHttpError(res, "INVALID_PASSWORD", 401)
             return

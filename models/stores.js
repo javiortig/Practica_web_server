@@ -19,7 +19,7 @@ const Store = sequelize.define(
         },
         email:{
             type: DataTypes.STRING,
-            unique: true
+            // unique: true Mismo problema que con el email en users
         },
         phone: {
             type: DataTypes.STRING

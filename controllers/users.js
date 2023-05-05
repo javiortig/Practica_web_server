@@ -9,47 +9,94 @@ const {usersModel} = require("../models")
  * @param {*} req 
  * @param {*} res 
  */
-const updateMerchantCtrl = async (req, res) => {
+const updateUserCtrl = async (req, res) => {
     try {
-        const {id} = req.params;
-        const {...body} = matchedData(req) //Extrae el id y el resto lo asigna a la constante body
-        const data = await storesModel.findOne({where: {id: id}});
+        const {id, ...body} = matchedData(req)
+        const user = req.user
 
-        if(!data){
-            handleHttpError(res, "STORE_NOT_EXISTS", 404)
-            return
+        const target_user = await usersModel.findOne({where: {id: id}});
+
+        if (!target_user){
+            handleHttpError(res, 'USER_NOT_FOUND', 404)
         }
-        
-        const update = await data.update(body)
 
-        res.send(update)    
+        // Un switch con todos los casos que no se pueden permitir, en cualquier otro caso se permite
+        switch (target_user.role) {
+            case "admin":   // los admin solo se modifican en la propia
+                handleHttpError(res, 'UPDATE_FORBIDDEN', 403) 
+                break;
+        
+            case "merchant":    // solo si eres tu mismo o eres admin
+                if (user.role == "user" || (user.role == "merchant" && user.id != target_user.id)){
+                    handleHttpError(res, 'UNAUTHORIZED', 401) 
+                }
+                break;
+
+            case "user":        // solo si eres tu mismo o eres admin
+                if (user.role == "merchant" || (user.role == "user" && user.id != target_user.id)){
+                    handleHttpError(res, 'UNAUTHORIZED', 401) 
+                }
+                break;
+            default:
+                handleHttpError(res, 'ERROR_UPDATE_USER', 500)
+                break;
+        }
+
+        target_user.update(body)
+        res.send(user)
+        
     }catch(err){
-        console.log(err) 
-        handleHttpError(res, 'ERROR_UPDATE_MERCHANT')
+        handleHttpError(res, 'ERROR_UPDATE_USER')
     }
 }
 
 
 /**
- * Eliminar un registro
+ * Eliminar un usuario.
+ * Los Admin pueden eliminar todos los usuarios excepto otros admins
+ * Los merchants sólo pueden eliminarse a sí mismos (ten en cuenta que al tener ONDELETECASCADE si se borra
+ *  el merchant, se borrará su store)
+ * Los users sólo pueden eliminarse a sí mismos
  * @param {*} req 
  * @param {*} res 
  */
 const deleteUserCtrl = async (req, res) => {
     try {
-        const {id, user} = matchedData(req)
-        //const data = await tracksModel.deleteOne({_id:id}); // "deleteOne" realiza el borrado físico en la BD
-        // const data = await tracksModel.delete({_id:id}); // "delete" realiza el borrado lógico
-        // res.send(data) 
+        const {id} = matchedData(req)
+        const user = req.user
+        const target_user = await usersModel.findOne({where: {id: id}});
 
-        console.log("DELETE USER:")
-        console.log(user.role, id)
+        if (!target_user){
+            handleHttpError(res, 'USER_NOT_FOUND', 404)
+        }
+
+        // Un switch con todos los casos que no se pueden permitir, en cualquier otro caso se permite
+        switch (target_user.role) {
+            case "admin":
+                handleHttpError(res, 'DELETE_FORBIDDEN', 403) 
+                break;
         
+            case "merchant":
+                if (user.role == "user" || (user.role == "merchant" && user.id != target_user.id)){
+                    handleHttpError(res, 'UNAUTHORIZED', 401) 
+                }
+                break;
+
+            case "user":
+                if (user.role == "merchant" || (user.role == "user" && user.id != target_user.id)){
+                    handleHttpError(res, 'UNAUTHORIZED', 401) 
+                }
+                break;
+            default:
+                handleHttpError(res, 'ERROR_DELETE_USER', 500)
+                break;
+        }
+
+        target_user.destroy()
         res.send(user)
         
     }catch(err){
-        //console.log(err)
-        handleHttpError(res, 'ERROR_DELETE_ITEM')
+        handleHttpError(res, 'ERROR_DELETE_USER')
     }
 }
 
@@ -57,4 +104,4 @@ const deleteUserCtrl = async (req, res) => {
 
 
 
-module.exports = { deleteUserCtrl, updateMerchantCtrl }
+module.exports = { deleteUserCtrl, updateUserCtrl }

@@ -16,15 +16,10 @@ const authMiddleware = async (req, res, next) => {
 
         if(!dataToken){
             handleHttpError(res, "NOT_PAYLOAD_DATA", 401)
-            retrun
+            return
        }
         
-        const query = {
-            // _id o id 
-            ["id"]: dataToken["id"]
-        }
-
-        const user = await usersModel.findOne(query) // findOne válido para Mongoose y Sequelize
+        const user = await usersModel.findOne({where: {id: dataToken.id}}) // findOne válido para Mongoose y Sequelize
         req.user = user // Inyecto al user en la petición
 
         next()

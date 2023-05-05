@@ -43,7 +43,7 @@ app.listen(port, () => {
 
 
 dbConnectMySql() 
-sequelize.sync() // Crea las tablas en la base de datos si no existieran
+sequelize.sync({alter: true}) // Crea las tablas en la base de datos si no existieran
 
 module.exports = app
 
