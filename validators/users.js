@@ -1,6 +1,12 @@
 const { check, param } = require("express-validator")
 const validateResults = require("../utils/handleValidator")
 
+const validatorGetUser = [
+    param('id').exists().notEmpty().isNumeric(),
+    (req, res, next) => {
+        return validateResults(req, res, next)
+    }
+]
 
 // Cuando el merchant recibe el token dado por el admin, se termina de registrar. Le obliga  a cambiar la contraseña
 const validatorUpdateWebsite = [
@@ -16,7 +22,6 @@ const validatorUpdateWebsite = [
     }
 ]
 
-// El put de Admin a /merchants/?id
 const validatorUpdateMerchant = [
     check("name").optional().notEmpty().isLength( {min:3, max: 50} ),
     //check("email").optional().notEmpty().isEmail(),
@@ -42,6 +47,7 @@ const validatorUpdateUser = [
     check('interests.*').optional().isLength({ min: 1, max: 25 }),
     check('accepts_offers').optional().notEmpty().isBoolean(),
     check('owns_store_id').not().exists().withMessage('`owns_store_id` field not allowed'),
+    check('role').not().exists().withMessage('`role` field not allowed'),
     (req, res, next) => {
         return validateResults(req, res, next)
     }
@@ -55,4 +61,5 @@ const validatorDeleteUser = [
 ]
 
 
-module.exports = { validatorUpdateWebsite, validatorUpdateMerchant, validatorDeleteUser, validatorUpdateUser }
+module.exports = { validatorUpdateWebsite, validatorUpdateMerchant, validatorDeleteUser, validatorUpdateUser,
+    validatorGetUser }

@@ -2,7 +2,7 @@ const { matchedData } = require("express-validator")
 const { tokenSign } = require("../utils/handleJwt")
 const { encrypt, compare } = require("../utils/handlePassword")
 const {handleHttpError} = require("../utils/handleError")
-const {usersModel, storesModel} = require("../models")
+const {usersModel, companyModel} = require("../models")
 
 /**
  * Encargado de hacer login del usuario
@@ -89,14 +89,18 @@ const registerMerchantCtrl = async (req, res) => {
             city: req.city,
             accepts_offers: false
         }
+
         const dataUser = await usersModel.create(userBody)
+        .catch(() =>{
+            handleHttpError(res, "ERROR_USER_ALREADY_EXISTS")
+        })
 
         // Esto por seguridad, ya no hace falta que viaje la password entonces la quito
         dataUser.set('password', undefined, { strict: false }) 
 
         //Generamos el store
-        storeBody = {
-            name: req.store_name,
+        const CompanyBody = {
+            name: req.company_name,
             cif: req.cif,
             address: req.address,
             email: req.email,
@@ -106,7 +110,7 @@ const registerMerchantCtrl = async (req, res) => {
             summary: null,
             owner_id: dataUser.id
         }
-        const storeData = await storesModel.create(storeBody)
+        const storeData = await companyModel.create(CompanyBody)
 
         // Falta asignar al user creado su store, hacemos un update:
 
@@ -116,13 +120,13 @@ const registerMerchantCtrl = async (req, res) => {
         const data = {
             token: await tokenSign(dataUser),
             user: dataUserUpdate,
-            store: storeData
+            company: storeData
         }
 
         res.send(data) 
 
     }catch(err) {
-        console.log(err)
+        // console.log(err)
         handleHttpError(res, "ERROR_REGISTER_MERCHANT")
     }
 }

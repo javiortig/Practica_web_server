@@ -26,43 +26,54 @@ Content-Type: application/json
   
 }
 
-### Registro de Merchant(store y user con rol merchant)
+### Registro de Merchant(company y user con rol merchant) hecho desde un admin
 
 POST http://localhost:3000/api/auth/merchant HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjgzMjkyNDU5LCJleHAiOjE2ODMzMDY4NTl9.UojSwbcs2y6wLpEajOEw6Aabb7MfouulzW7UPFFN44M
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6InVzZXIiLCJpYXQiOjE2ODMzMTA5MzIsImV4cCI6MTY4MzMyNTMzMn0.L-p3GnGXodfs7jqQha7J1ylE3wZ3UITf-ynrMTUR7iQ
 
 {
-    "store_name": "Banana",
     "username": "banana_store",
-    "email": "banana@gmail.com",
+    "password": "Prueba1234!",
+    "city": "Madrid",
+    "age": "32",
+
+    "company_name": "Banana",
     "phone": "618111456",
     "address": "calle la q sea 32",
     "cif": "B12459786",
-    "password": "Prueba1234!",
-    "city": "Madrid"
-  
+    "email": "banana@gmail.com"
 }
 
 ### Update de usuario
 
-PUT http://localhost:3000/api/users/4 HTTP/1.1
+PUT http://localhost:3000/api/users/id/2 HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjgzMjkzMzE5LCJleHAiOjE2ODMzMDc3MTl9.ga0vVtUt8urvLzBxxwBNRHIehNp0z8XVRM4oLtJlx_M
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6InVzZXIiLCJpYXQiOjE2ODMzMDk5NDUsImV4cCI6MTY4MzMyNDM0NX0.zIIJlwv8iOG3LPlq7b-MGgLohtgVulOIsDeA1h-okfw
 
 {
     "name": "ASD",
     "age": "12",
     "address": "dasfafsd",
     "cif": "G12345678",
-    "city": "Malaga",
-    "role": "user"
+    "city": "Malaga"
 }
 
 ### borrar un usuario(ya sea merchant o user, los admin solo se peuden borrar a mano)
 
-DELETE http://localhost:3000/api/users/4 HTTP/1.1
+DELETE http://localhost:3000/api/users/id/5 HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjgzMjg5NTMyLCJleHAiOjE2ODMzMDM5MzJ9.k2QbuIVETjijf_2ytPo9w-KK04wKW8Jy8PtUxGd3UAI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6InVzZXIiLCJpYXQiOjE2ODMzMDk5NDUsImV4cCI6MTY4MzMyNDM0NX0.zIIJlwv8iOG3LPlq7b-MGgLohtgVulOIsDeA1h-okfw
 
-###
+### get user desde un admin 
+
+GET http://localhost:3000/api/users/id/2 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6InVzZXIiLCJpYXQiOjE2ODMzMDk5NDUsImV4cCI6MTY4MzMyNDM0NX0.zIIJlwv8iOG3LPlq7b-MGgLohtgVulOIsDeA1h-okfw
+
+### get merchants desde un admin 
+
+GET http://localhost:3000/api/users/merchants HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6InVzZXIiLCJpYXQiOjE2ODMzMDk5NDUsImV4cCI6MTY4MzMyNDM0NX0.zIIJlwv8iOG3LPlq7b-MGgLohtgVulOIsDeA1h-okfw
+

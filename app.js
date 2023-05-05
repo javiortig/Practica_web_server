@@ -10,7 +10,7 @@ const { sequelize, dbConnectMySql } = require("./config/mysql")
 // Esto se borra luego, es para testear. Se deberá incluir en los controllers
 const { interestsModel } = require('./models/')
 const { reviewsModel } = require('./models/')
-const { storesModel } = require('./models/')
+const { companyModel: storesModel } = require('./models/')
 const { usersModel } = require('./models/')
 
 const app = express() 

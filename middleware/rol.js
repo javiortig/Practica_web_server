@@ -7,9 +7,9 @@ const { handleHttpError } = require("../utils/handleError")
 const checkRol = (roles) => (req, res, next) => { //Doble argumento
     try{
         const {user} = req
-        const userRol = user.role
+        const userRole = user.role
         //Comprobamos que el rol del usuario esté en roles
-        const checkValueRol = roles.includes(userRol)
+        const checkValueRol = roles.includes(userRole)
         if (!checkValueRol) {
             handleHttpError(res, "NOT_ALLOWED", 403)
             return

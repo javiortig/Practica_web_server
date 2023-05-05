@@ -9,6 +9,44 @@ const {usersModel} = require("../models")
  * @param {*} req 
  * @param {*} res 
  */
+const getUserCtrl = async (req, res) => {
+    try {
+        const {id} = matchedData(req)
+
+        const target_user = await usersModel.findOne({where: {id: id}});
+
+        if (!target_user){
+            handleHttpError(res, 'USER_NOT_FOUND', 404)
+        }
+
+        res.send(target_user)
+        
+    }catch(err){
+        handleHttpError(res, 'ERROR_GET_USER')
+    }
+}
+
+/**
+ * Registra una store y un usuario merchant
+ * @param {*} req 
+ * @param {*} res 
+ */
+const getMerchantsCtrl = async (req, res) => {
+    try {
+        const target_users = await usersModel.findAll({where: {role: "merchant"}})
+
+        res.send(target_users)
+        
+    }catch(err){
+        handleHttpError(res, 'ERROR_GET_MERCHANTS')
+    }
+}
+
+/**
+ * Registra una store y un usuario merchant
+ * @param {*} req 
+ * @param {*} res 
+ */
 const updateUserCtrl = async (req, res) => {
     try {
         const {id, ...body} = matchedData(req)
@@ -43,7 +81,7 @@ const updateUserCtrl = async (req, res) => {
         }
 
         target_user.update(body)
-        res.send(user)
+        res.send(target_user)
         
     }catch(err){
         handleHttpError(res, 'ERROR_UPDATE_USER')
@@ -93,7 +131,7 @@ const deleteUserCtrl = async (req, res) => {
         }
 
         target_user.destroy()
-        res.send(user)
+        res.send(target_user)
         
     }catch(err){
         handleHttpError(res, 'ERROR_DELETE_USER')
@@ -104,4 +142,4 @@ const deleteUserCtrl = async (req, res) => {
 
 
 
-module.exports = { deleteUserCtrl, updateUserCtrl }
+module.exports = { deleteUserCtrl, updateUserCtrl, getUserCtrl, getMerchantsCtrl }

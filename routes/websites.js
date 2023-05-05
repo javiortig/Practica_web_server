@@ -1,3 +1,4 @@
+
 const express = require("express")
 const router = express.Router()
 
@@ -8,10 +9,13 @@ const authMiddleware = require("../middleware/session")
 
 const {deleteUserCtrl, updateMerchantCtrl} = require('../controllers/users')
 
-// TODO:
-//router.put("/:id", authMiddleware, checkRol(["admin"]), validatorUpdateMerchant, updateMerchantCtrl)
 
-// TODO: borrar una store (borrará su usuario asociado tambien)
-//router.delete("/:id", authMiddleware, validatorDeleteUser, deleteUserCtrl)
+// TODO Obtener a todos los clientes de su ciudad que reciben ofertas:
+router.get("/clients")
+
+// TODO Obtener a todos los clientes de la ciudad por parámetro que reciben ofertas:
+router.get("/clients/id/:id")
+
+
 
 module.exports = router

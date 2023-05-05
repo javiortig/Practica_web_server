@@ -2,28 +2,9 @@ const { sequelize } = require("../config/mysql")
 const { DataTypes } = require("sequelize")
 const { Review } = require('./reviews')
 
-const Store = sequelize.define(
-    "stores", //Nombre de la tabla
+const Website = sequelize.define(
+    "website", //Nombre de la tabla
     {
-        name: {
-            type: DataTypes.STRING,
-            allowNull: false, 
-        },
-        cif: {
-            type: DataTypes.CHAR(9), // Validaciones en los middleware
-            allowNull: false
-        },
-        address: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        email:{
-            type: DataTypes.STRING,
-            // unique: true Mismo problema que con el email en users
-        },
-        phone: {
-            type: DataTypes.STRING
-        },
         city:{
             type: DataTypes.STRING,
             allowNull: false
@@ -51,7 +32,7 @@ const Store = sequelize.define(
             type: DataTypes.INTEGER,
             defaultValue: 0
         },
-        owner_id:{
+        company_id:{ // los usuarios que no sean merchant no tienen stores
             type:DataTypes.INTEGER,
             allowNull: false
         }
@@ -62,8 +43,8 @@ const Store = sequelize.define(
     }
 )
 
-const StoreTexts = sequelize.define(
-    "store_texts", //Nombre de la tabla
+const WebsiteTexts = sequelize.define(
+    "website_texts", //Nombre de la tabla
     {
         content: {
             type: DataTypes.STRING
@@ -74,8 +55,8 @@ const StoreTexts = sequelize.define(
     }
 )
 
-const Photos = sequelize.define(
-    "store_photos",
+const WebsitePhotos = sequelize.define(
+    "website_photos",
     {
         content: {
             type: DataTypes.STRING
@@ -83,7 +64,7 @@ const Photos = sequelize.define(
     }
 )
 
-Store.hasMany(StoreTexts)
-Store.hasMany(Photos)
+Website.hasMany(WebsiteTexts)
+Website.hasMany(WebsitePhotos)
 
-module.exports = Store
+module.exports = Website

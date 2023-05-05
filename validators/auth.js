@@ -17,14 +17,20 @@ const validatorRegisterUser = [
 // El registro del Admin para comenzar el registro de Merchant. Le crea por un lado un usuario merchant y 
 // por otro su comercio.
 const validatorRegisterMerchant = [
-    check("store_name").exists().notEmpty().isLength( {min:3, max: 100} ),
+    // user with role merchant
     check("username").exists().notEmpty().isLength( {min:3, max: 50} ),
-    check("email").exists().notEmpty().isEmail(),
+    check("password").exists().notEmpty().isLength({ min: 8 , max: 36}).matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/),
+    check("age").exists().notEmpty().isNumeric({min: 15, max: 150}),
+    check("city").exists().notEmpty().isLength( {min:3, max: 100} ),
+
+    // company
+    check("company_name").exists().notEmpty().isLength( {min:3, max: 100} ),
     check("phone").exists().notEmpty().isMobilePhone(),
     check("address").exists().notEmpty().matches(/^[a-zA-Z0-9\s.,-]+$/),
     check("cif").exists().notEmpty().matches(/^[A-HJNP-SUVE]{1}\d{7}[0-9A-J]{1}$/),// Expresion regular del CIF
-    check("password").exists().notEmpty().isLength({ min: 8 , max: 36}).matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/),
-    check("city").exists().notEmpty().isLength( {min:3, max: 100} ),
+
+    // both
+    check("email").exists().notEmpty().isEmail(),
     (req, res, next) => {
         return validateResults(req, res, next)
     }

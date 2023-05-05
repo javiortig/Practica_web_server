@@ -16,12 +16,6 @@ const User = sequelize.define(
         },
         email: {
             type: DataTypes.STRING,
-/*
-    IMPORTANTE: sequelize por lo que sea no detecta que ya existe la key, por lo que cada vez que lo ejecuto
-    me la vuelve a crear y cuando ejecuto el server 64 veces me da MAX_KEY_ERROR, por lo que no me queda otra
-    que ponerlo en false aunque debería de ser unique (si no tengo que borrar la DB cada dos por tres).
-    La solucion que he encontrado en github es añadir los indices abajo:
-*/
             //unique: true
         },
         password:{
@@ -41,7 +35,7 @@ const User = sequelize.define(
             type: DataTypes.BOOLEAN,
             defaultValue: true
         },
-        owns_store_id:{ // los usuarios que no sean merchant no tienen stores
+        owns_company_id:{ // los usuarios que no sean merchant no tienen stores
             type:DataTypes.INTEGER,
             allowNull: true
         }
