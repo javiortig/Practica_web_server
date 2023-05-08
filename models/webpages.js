@@ -2,8 +2,8 @@ const { sequelize } = require("../config/mysql")
 const { DataTypes } = require("sequelize")
 const { Review } = require('./reviews')
 
-const Website = sequelize.define(
-    "website", //Nombre de la tabla
+const Webpage = sequelize.define(
+    "webpage", //Nombre de la tabla
     {
         city:{
             type: DataTypes.STRING,
@@ -18,7 +18,7 @@ const Website = sequelize.define(
             allowNull: true
         },
         /*
-        Cuando un usuario añade una reseña, esa reseña tiene relacion con una store,
+        Cuando un usuario añade una reseña, esa reseña tiene relacion con una company,
         por lo que se incrementa scoring count
         El nuevo score se calcula con (scoring_anterior * viejo_scoring_count + nueva_valoracion)/(nuevo_scoring_count)
 
@@ -32,7 +32,7 @@ const Website = sequelize.define(
             type: DataTypes.INTEGER,
             defaultValue: 0
         },
-        company_id:{ // los usuarios que no sean merchant no tienen stores
+        company_id:{ // los usuarios que no sean merchant no tienen company
             type:DataTypes.INTEGER,
             allowNull: false
         }
@@ -43,8 +43,8 @@ const Website = sequelize.define(
     }
 )
 
-const WebsiteTexts = sequelize.define(
-    "website_texts", //Nombre de la tabla
+const WebpageTexts = sequelize.define(
+    "webpage_texts", //Nombre de la tabla
     {
         content: {
             type: DataTypes.STRING
@@ -55,16 +55,19 @@ const WebsiteTexts = sequelize.define(
     }
 )
 
-const WebsitePhotos = sequelize.define(
-    "website_photos",
+const WebpagePhotos = sequelize.define(
+    "webpage_photos",
     {
-        content: {
+        url: {
+            type: DataTypes.STRING
+        },
+        filename: {
             type: DataTypes.STRING
         }
     }
 )
 
-Website.hasMany(WebsiteTexts)
-Website.hasMany(WebsitePhotos)
+Webpage.hasMany(WebpageTexts)
+Webpage.hasMany(WebpagePhotos)
 
-module.exports = Website
+module.exports = Webpage

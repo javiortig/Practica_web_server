@@ -1,5 +1,16 @@
 # Testeos de todas las rutas:
 
+### Login de usuario (merchant)
+
+POST http://localhost:3000/api/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "banana@gmail.com",
+    "password": "Prueba1234!"
+    
+}
+
 ### Login de usuario (admin)
 
 POST http://localhost:3000/api/auth/login HTTP/1.1
@@ -30,10 +41,10 @@ Content-Type: application/json
 
 POST http://localhost:3000/api/auth/merchant HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6InVzZXIiLCJpYXQiOjE2ODMzMTA5MzIsImV4cCI6MTY4MzMyNTMzMn0.L-p3GnGXodfs7jqQha7J1ylE3wZ3UITf-ynrMTUR7iQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6InVzZXIiLCJpYXQiOjE2ODM1NTEyMjYsImV4cCI6MTY4MzU2NTYyNn0.rKGj57RKiuplXcV-xSg8QO7cxTtPd5VZ67zZnVKJDig
 
 {
-    "username": "banana_store",
+    "username": "banana_company",
     "password": "Prueba1234!",
     "city": "Madrid",
     "age": "32",
@@ -77,3 +88,27 @@ GET http://localhost:3000/api/users/merchants HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6InVzZXIiLCJpYXQiOjE2ODMzMDk5NDUsImV4cCI6MTY4MzMyNDM0NX0.zIIJlwv8iOG3LPlq7b-MGgLohtgVulOIsDeA1h-okfw
 
+### Registro de una Webpage desde un merchant
+
+POST http://localhost:3000/api/webpages HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Nywicm9sZSI6Im1lcmNoYW50IiwiaWF0IjoxNjgzNTU0NzIyLCJleHAiOjE2ODM1NjkxMjJ9.049HKgZCHA_akK8XGVPR-MgYZ4FuPS_0xd12btYS7v4
+
+{
+    "city": "Malaga",
+    "interests": ["comida", "bebida"],
+    "title": "100 Montaditos",
+    "summary": "a comer bocatas"
+}
+
+### Update de la Webpage
+
+PUT http://localhost:3000/api/webpages/1 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZSI6Im1lcmNoYW50IiwiaWF0IjoxNjgzNTUyNDkxLCJleHAiOjE2ODM1NjY4OTF9.vsKjsyE7ArCigWBnG-bNb2JJViYBD-xO2Op1fl50N-E
+
+{
+    "city": "Albacete",
+    "title": "TGB",
+    "summary": "a comer amburgesa"
+}

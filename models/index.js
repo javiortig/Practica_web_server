@@ -5,18 +5,18 @@ const models = {
     reviewsModel: require('./reviews'),
     companyModel: require('./company'),
     usersModel: require('./users'),
-    websiteModel: require('./website')
+    webpageModel: require('./webpages')
 }
 
 // Creamos relaciones entre tablas
 models.interestsModel.belongsToMany(models.usersModel, {through: 'users_interests'})
 
-models.interestsModel.belongsToMany(models.websiteModel, {through: 'webpage_interests'})
+models.interestsModel.belongsToMany(models.webpageModel, {through: 'webpage_interests'})
 
 
-models.websiteModel.belongsToMany(models.interestsModel, {through: 'webpage_interests'})
+models.webpageModel.belongsToMany(models.interestsModel, {through: 'webpage_interests'})
 
-models.websiteModel.hasMany(models.reviewsModel)
+models.webpageModel.hasMany(models.reviewsModel)
 
 models.companyModel.belongsTo(models.usersModel, {foreignKey: 'owner_id',as: 'owner', onDelete: 'CASCADE'})
 
@@ -27,6 +27,6 @@ models.usersModel.belongsToMany(models.interestsModel, {through: 'users_interest
 
 models.usersModel.belongsTo(models.companyModel, {foreignKey: 'owns_company_id', as: 'owns_company', onDelete: 'CASCADE'})
 
-models.websiteModel.belongsTo(models.companyModel, {foreignKey: 'company_id', as: 'company'})
+models.webpageModel.belongsTo(models.companyModel, {foreignKey: 'company_id', as: 'company'})
 
 module.exports = models

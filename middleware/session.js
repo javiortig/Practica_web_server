@@ -1,6 +1,8 @@
 const { handleHttpError } = require("../utils/handleError")
 const { verifyToken } = require("../utils/handleJwt")
+const { matchedData } = require("express-validator")
 const { usersModel } = require("../models")
+const { sequelize } = require("../config/mysql")
 
 const authMiddleware = async (req, res, next) => {
     try{
@@ -29,4 +31,28 @@ const authMiddleware = async (req, res, next) => {
     }
 }
 
-module.exports = authMiddleware
+const ownsWebpageMiddleware = async (req, res, next) => {
+    try{
+        const {id, user} = matchedData(req)
+        // Esta query debería ser muy rápida puesto que los joins son con ids
+        const query = sequelize.query(`SELECT users.id
+            FROM users  
+            INNER JOIN  
+            companies  
+            ON  
+            users.id = companies.owner_id
+            INNER JOIN  
+            webpages  
+            ON  
+            webpages.company_id = companies.id
+            AND webpages.id = `+ id + `;`)
+
+        console.log(query)
+        next()
+
+    }catch(err){
+        handleHttpError(res, "INTERNAL_SERVER_ERROR", 500)
+    }
+}
+
+module.exports = {authMiddleware, ownsWebpageMiddleware}

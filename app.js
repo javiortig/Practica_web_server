@@ -10,7 +10,7 @@ const { sequelize, dbConnectMySql } = require("./config/mysql")
 // Esto se borra luego, es para testear. Se deberá incluir en los controllers
 const { interestsModel } = require('./models/')
 const { reviewsModel } = require('./models/')
-const { companyModel: storesModel } = require('./models/')
+const { companyModel } = require('./models/')
 const { usersModel } = require('./models/')
 
 const app = express() 
@@ -43,7 +43,7 @@ app.listen(port, () => {
 
 
 dbConnectMySql() 
-sequelize.sync({alter: true}) // Crea las tablas en la base de datos si no existieran
+sequelize.sync({alter: true})// Crea las tablas en la base de datos si no existieran
 
 module.exports = app
 

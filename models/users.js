@@ -35,7 +35,7 @@ const User = sequelize.define(
             type: DataTypes.BOOLEAN,
             defaultValue: true
         },
-        owns_company_id:{ // los usuarios que no sean merchant no tienen stores
+        owns_company_id:{ // los usuarios que no sean merchant no tienen company
             type:DataTypes.INTEGER,
             allowNull: true
         }

@@ -4,14 +4,14 @@ const router = express.Router()
 const {validatorUpdateUser, validatorGetUser, validatorDeleteUser} = require("../validators/users")
 
 const {checkRol} = require("../middleware/rol")
-const authMiddleware = require("../middleware/session")
+const {authMiddleware} = require("../middleware/session")
 
 const {deleteUserCtrl, updateUserCtrl, getUserCtrl, getMerchantsCtrl} = require('../controllers/users')
 
-// TODO Obtener info de los usuarios(solo admins)
+// Obtener la info de un usuario (Solo admin)
 router.get("/id/:id", authMiddleware, checkRol(["admin"]), validatorGetUser, getUserCtrl)
 
-// TODO Obtener a todos los merchants(solo admin)
+// Obtener a todos los merchants(solo admin)
 router.get("/merchants", authMiddleware, checkRol(["admin"]), getMerchantsCtrl)
 
 // Actualizar un usuario (merchants o normales)

@@ -52,7 +52,7 @@ const registerUserCtrl = async (req, res) => {
     try {
         req = matchedData(req)
         const password = await encrypt(req.password)
-        const body = {...req, password, owns_store_id: null} 
+        const body = {...req, password, owns_company_id: null} 
         const dataUser = await usersModel.create(body)
 
         // Esto por seguridad, ya no hace falta que viaje la password entonces la quito 
@@ -70,7 +70,7 @@ const registerUserCtrl = async (req, res) => {
 }
 
 /**
- * Registra una store y un usuario merchant
+ * Registra una company y un usuario merchant
  * @param {*} req 
  * @param {*} res 
  */
@@ -98,7 +98,7 @@ const registerMerchantCtrl = async (req, res) => {
         // Esto por seguridad, ya no hace falta que viaje la password entonces la quito
         dataUser.set('password', undefined, { strict: false }) 
 
-        //Generamos el store
+        //Generamos la company
         const CompanyBody = {
             name: req.company_name,
             cif: req.cif,
@@ -110,17 +110,17 @@ const registerMerchantCtrl = async (req, res) => {
             summary: null,
             owner_id: dataUser.id
         }
-        const storeData = await companyModel.create(CompanyBody)
+        const companyData = await companyModel.create(CompanyBody)
 
-        // Falta asignar al user creado su store, hacemos un update:
+        // Falta asignar al user creado su company, hacemos un update:
 
-        const dataUserUpdate = await dataUser.update({owns_store_id: storeData.id})
+        const dataUserUpdate = await dataUser.update({owns_company_id: companyData.id})
 
         // Enviamos los datos de ambos
         const data = {
             token: await tokenSign(dataUser),
             user: dataUserUpdate,
-            company: storeData
+            company: companyData
         }
 
         res.send(data) 

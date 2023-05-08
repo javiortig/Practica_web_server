@@ -1,11 +1,9 @@
 const { matchedData } = require("express-validator")
-const { tokenSign } = require("../utils/handleJwt")
-const { encrypt, compare } = require("../utils/handlePassword")
 const {handleHttpError} = require("../utils/handleError")
 const {usersModel} = require("../models")
 
 /**
- * Registra una store y un usuario merchant
+ * Registra una company y un usuario merchant
  * @param {*} req 
  * @param {*} res 
  */
@@ -27,7 +25,7 @@ const getUserCtrl = async (req, res) => {
 }
 
 /**
- * Registra una store y un usuario merchant
+ * Registra una company y un usuario merchant
  * @param {*} req 
  * @param {*} res 
  */
@@ -43,7 +41,7 @@ const getMerchantsCtrl = async (req, res) => {
 }
 
 /**
- * Registra una store y un usuario merchant
+ * Registra una company y un usuario merchant
  * @param {*} req 
  * @param {*} res 
  */
@@ -93,7 +91,7 @@ const updateUserCtrl = async (req, res) => {
  * Eliminar un usuario.
  * Los Admin pueden eliminar todos los usuarios excepto otros admins
  * Los merchants sólo pueden eliminarse a sí mismos (ten en cuenta que al tener ONDELETECASCADE si se borra
- *  el merchant, se borrará su store)
+ *  el merchant, se borrará su company)
  * Los users sólo pueden eliminarse a sí mismos
  * @param {*} req 
  * @param {*} res 
