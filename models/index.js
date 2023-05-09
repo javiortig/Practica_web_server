@@ -5,16 +5,18 @@ const models = {
     reviewsModel: require('./reviews'),
     companyModel: require('./company'),
     usersModel: require('./users'),
-    webpageModel: require('./webpages')
+    webpageModel: require('./webpages'),
+    userInterestModel: require('./users_interests'),
+    WebpageInterestModel: require('./webpage_interests'),
 }
 
 // Creamos relaciones entre tablas
-models.interestsModel.belongsToMany(models.usersModel, {through: 'users_interests'})
+models.interestsModel.belongsToMany(models.usersModel, {through: models.userInterestModel})
 
-models.interestsModel.belongsToMany(models.webpageModel, {through: 'webpage_interests'})
+models.interestsModel.belongsToMany(models.webpageModel, {through: models.WebpageInterestModel})
 
 
-models.webpageModel.belongsToMany(models.interestsModel, {through: 'webpage_interests'})
+models.webpageModel.belongsToMany(models.interestsModel, {through: models.WebpageInterestModel})
 
 models.webpageModel.hasMany(models.reviewsModel)
 
@@ -23,7 +25,7 @@ models.companyModel.belongsTo(models.usersModel, {foreignKey: 'owner_id',as: 'ow
 
 models.usersModel.hasMany(models.reviewsModel)
 
-models.usersModel.belongsToMany(models.interestsModel, {through: 'users_interests'})
+models.usersModel.belongsToMany(models.interestsModel, {through: models.userInterestModel})
 
 models.usersModel.belongsTo(models.companyModel, {foreignKey: 'owns_company_id', as: 'owns_company', onDelete: 'CASCADE'})
 

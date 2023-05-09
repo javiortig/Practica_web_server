@@ -1,6 +1,86 @@
 const { matchedData } = require("express-validator")
 const {handleHttpError} = require("../utils/handleError")
-const {usersModel, webpageModel, interestsModel} = require("../models")
+const {usersModel, webpageModel, interestsModel, reviewsModel} = require("../models")
+
+
+/**
+ * devuelve todas las paginas
+ * @param {*} req 
+ * @param {*} res 
+ */
+const getWebpagesCtrl = async (req, res) => {
+    try {
+        const webpages = await webpageModel.findAll();
+
+        if (!webpages){
+            handleHttpError(res, 'NO_PAGES_AVAILABLE', 404)
+        }
+
+        res.send(webpages)
+        
+    }catch(err){
+        handleHttpError(res, 'ERROR_GET_USER')
+    }
+}
+
+/**
+ * devuelve una pagina especifica
+ * @param {*} req 
+ * @param {*} res 
+ */
+const getWebpageCtrl = async (req, res) => {
+    try {
+        const {id} = matchedData(req)
+        const webpage = await webpageModel.findOne({where: {id: id}});
+
+        if (!webpage){
+            handleHttpError(res, 'NOT FOUND', 404)
+        }
+
+        res.send(webpage)
+        
+    }catch(err){
+        handleHttpError(res, 'ERROR_GET_USER')
+    }
+}
+
+/**
+ * devuelve una lista de paginas por ciudad y por actividad(opcional)
+ * @param {*} req 
+ * @param {*} res 
+ */
+const getWebpageByCityActivityCtrl = async (req, res) => {
+    try {
+        const {id, city, activity} = matchedData(req)
+        let webpages = null;
+        // Si no hay activity, buscar solo por ciudad, sino por ambas
+        if (activity){
+            webpages = await webpageModel.findAll({
+                include: [
+                  {
+                    model: interestsModel,
+                    through: { attributes: [] }, // excluye la tabla intermedia 
+                    required: true ,// inner join
+                    where:{name: activity}
+                  }
+                ]
+              });
+        }
+        else{
+            webpages = await webpageModel.findAll({where: {city: city}})
+        }
+
+        if (!webpage){
+            handleHttpError(res, 'NOT FOUND', 404)
+        }
+
+        res.send(webpage)
+        
+    }catch(err){
+        handleHttpError(res, 'ERROR_GET_USER')
+    }
+}
+
 
 /**
  * Registra una company y un usuario merchant
@@ -78,6 +158,41 @@ const updateWebpageCtrl = async (req, res) => {
     }
 }
 
+/**
+ * Genera una review, ya sea sólo una score con o sin texto
+ * @param {*} req 
+ * @param {*} res 
+ */
+const createReviewCtrl = async (req, res) => {
+    try {
+        const {id, user, content, score} = matchedData(req)
+
+        let target_webpage = await webpageModel.findOne({where: {id: id}});
+        if (!target_webpage){
+            handleHttpError(res, 'WEBPAGE_NOT_FOUND', 404)
+        }
+
+        // Creamos la review
+        const review = await reviewsModel.create({
+            score: score,
+            content: (content)? content : null,
+            webpageId: id,
+            userId: user.id
+        })
+
+        // Modificamos el score de la pagina tras esta review
+        const new_scoring = (target_webpage.scoring * target_webpage.scoring_count + score)/(target_webpage.scoring_count + 1)
+        const new_scoring_count = target_webpage.scoring_count + 1
+
+        await target_webpage.update({scoring: new_scoring, scoring_count: new_scoring_count})
+
+        res.send(review)
+        
+    }catch(err){
+        handleHttpError(res, 'ERROR_UPDATE_WEBPAGE')
+    }
+}
 
 
-module.exports = { createWebpageCtrl, updateWebpageCtrl}
+
+module.exports = { createWebpageCtrl, updateWebpageCtrl, getWebpagesCtrl, getWebpageCtrl, getWebpageByCityActivityCtrl, createReviewCtrl}

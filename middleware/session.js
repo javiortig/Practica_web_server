@@ -33,21 +33,24 @@ const authMiddleware = async (req, res, next) => {
 
 const ownsWebpageMiddleware = async (req, res, next) => {
     try{
-        const {id, user} = matchedData(req)
-        // Esta query debería ser muy rápida puesto que los joins son con ids
-        const query = sequelize.query(`SELECT users.id
-            FROM users  
-            INNER JOIN  
-            companies  
-            ON  
-            users.id = companies.owner_id
-            INNER JOIN  
-            webpages  
-            ON  
-            webpages.company_id = companies.id
-            AND webpages.id = `+ id + `;`)
+        if (user.role != "admin"){
+            const {webpage_id, user} = matchedData(req)
+            // Esta query debería ser muy rápida puesto que los joins son con ids
+            const query = sequelize.query(`SELECT users.id
+                FROM users
+                INNER JOIN
+                companies
+                ON
+                users.id = companies.owner_id
+                INNER JOIN
+                webpages
+                ON
+                webpages.company_id = companies.id
+                AND webpages.id = `+ webpage_id + `;`)
 
-        console.log(query)
+            console.log(query)
+        }
+
         next()
 
     }catch(err){
@@ -55,4 +58,22 @@ const ownsWebpageMiddleware = async (req, res, next) => {
     }
 }
 
-module.exports = {authMiddleware, ownsWebpageMiddleware}
+const ownsCompanyMiddleware = async (req, res, next) => {
+    try{
+        if (user.role != "admin"){
+            const {company_id, user} = matchedData(req)
+        
+            if (user.owns_company_id != company_id){
+                handleHttpError(res, "USER_NOT_OWNS_COMPANY", 403)
+            }
+        }
+
+
+        next()
+
+    }catch(err){
+        handleHttpError(res, "INTERNAL_SERVER_ERROR", 500)
+    }
+}
+
+module.exports = {authMiddleware, ownsWebpageMiddleware, ownsCompanyMiddleware}

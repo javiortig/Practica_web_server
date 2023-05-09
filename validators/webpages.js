@@ -24,4 +24,28 @@ const validatorUpdateWebpage = [
     }
 ]
 
-module.exports = { validatorCreateWebpage, validatorUpdateWebpage}
+const validatorGetWebpage = [
+    param('id').exists().notEmpty().isNumeric(),
+    (req, res, next) => {
+        return validateResults(req, res, next)
+    }
+]
+
+const validatorgetWebpageByCityActivity = [
+    check("city").exists().notEmpty().isLength( {min:3, max: 100} ),
+    check('activity').optional().isLength( {min:2, max: 50} ),
+    (req, res, next) => {
+        return validateResults(req, res, next)
+    }
+]
+
+const validatorCreateReview = [
+    param('id').exists().notEmpty().isNumeric(),
+    check("content").exists().notEmpty().isLength( {min:3, max: 10000} ),
+    check('score').exists().isInt({ min: 0, max: 5 }).withMessage('`score` must be an integer between 0 and 5'),
+    (req, res, next) => {
+        return validateResults(req, res, next)
+    }
+]
+
+module.exports = { validatorCreateWebpage, validatorUpdateWebpage, validatorGetWebpage, validatorgetWebpageByCityActivity, validatorCreateReview}
