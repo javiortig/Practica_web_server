@@ -22,7 +22,8 @@ const Company = sequelize.define(
             // unique: true Mismo problema que con el email en users
         },
         phone: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: false
         },
         owner_id: {
             type:DataTypes.INTEGER,

@@ -41,7 +41,7 @@ const getMerchantsCtrl = async (req, res) => {
 }
 
 /**
- * Registra una company y un usuario merchant
+ * Actualiza un usuario(excepto admin)
  * @param {*} req 
  * @param {*} res 
  */
