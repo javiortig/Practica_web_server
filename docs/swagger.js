@@ -4,7 +4,7 @@ const options = {
     definition: {
       openapi: "3.0.3",
       info: {
-        title: "Tracks - Express API with Swagger (OpenAPI 3.0)",
+        title: "Practica U-Tad - Express API with Swagger (OpenAPI 3.0)",
         version: "0.1.0",
         description:
           "This is a CRUD API application made with Express and documented with Swagger",
@@ -31,7 +31,7 @@ const options = {
             },
         },
         schemas:{
-            user: {
+            User: {
                 type: "object",
                 required: ["name", "age", "email", "password"],
                 properties: {
@@ -62,7 +62,7 @@ const options = {
                     }
                 },
             },
-            company: {
+            Company: {
                 type: "object",
                 required: ["name", "cif", "address", "phone", "email"],
                 properties: {
@@ -90,7 +90,7 @@ const options = {
                     }
                 },
             },
-            webpage: {
+            Webpage: {
                 type: "object",
                 required: ["city", "title", "summary"],
                 properties: {
@@ -106,6 +106,22 @@ const options = {
                       type: "string",
                       example: "Hamburguesas en menos de 20 minutos de buena calidad"
                     }
+                },
+            },
+            Review: {
+                type: "object",
+                required: ["score"],
+                properties: {
+                    score: {
+                      type: "integer",
+                      example: 1,
+                      min: 0,
+                      max: 5
+                    },
+                    content: {
+                      type: "string",
+                      example: "This place is awful. The burguers taste horrible."
+                    },
                 },
             },
             

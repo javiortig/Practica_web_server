@@ -46,6 +46,12 @@ const validatorDeleteUser = [
     }
 ]
 
+const validatorGetClients = [
+    param('webpage_id').exists().notEmpty().isNumeric(),
+    (req, res, next) => {
+        return validateResults(req, res, next)
+    }
+]
 
 module.exports = { validatorUpdateMerchant, validatorDeleteUser, validatorUpdateUser,
-    validatorGetUser }
+    validatorGetUser, validatorGetClients }

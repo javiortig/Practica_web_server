@@ -9,6 +9,7 @@ const validatorRegisterUser = [
     check("city").exists().notEmpty().isLength( {min:3, max: 100} ),
     check('interests.*').optional().isLength({ min: 1, max: 25 }),
     check('accepts_offers').exists().notEmpty().isBoolean(),
+    check('role').not().exists().withMessage('`role` field not allowed'),
     (req, res, next) => {
         return validateResults(req, res, next)
     }
@@ -22,6 +23,7 @@ const validatorRegisterMerchant = [
     check("password").exists().notEmpty().isLength({ min: 8 , max: 36}).matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/),
     check("age").exists().notEmpty().isNumeric({min: 15, max: 150}),
     check("city").exists().notEmpty().isLength( {min:3, max: 100} ),
+    check('role').not().exists().withMessage('`role` field not allowed'),
 
     // company
     check("company_name").exists().notEmpty().isLength( {min:3, max: 100} ),

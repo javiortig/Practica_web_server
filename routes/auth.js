@@ -12,10 +12,28 @@ const {loginCtrl, registerUserCtrl, registerMerchantCtrl, updateMerchantCtrl} = 
 
 
 /*
-    Estas son las rutas para todos los registros y el login
+    Estas son las rutas para todos los registros y el login de usuarios
 */
 
-// Login: POST http://localhost:3000/api/auth/login
+/**
+ * @openapi
+ * /api/auth/login:
+ *  post:
+ *      tags:
+ *      - User
+ *      summary: Login user
+ *      description: Log in for users, merchants and admins
+ *      requestBody:
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: "#/components/schemas/login"
+ *      responses:
+ *          '200':
+ *              description: Returns the JWT for authentification
+ *          '401':
+ *              description: Validation error
+ */
 router.post("/login", validatorLogin, loginCtrl) 
 
 /**
@@ -39,7 +57,25 @@ router.post("/login", validatorLogin, loginCtrl)
  */
 router.post("/merchant", authMiddleware, checkRol(["admin"]), validatorRegisterMerchant, registerMerchantCtrl)
 
-// Registro solo de usuarios: POST /api/auth/users 
+/**
+ * @openapi
+ * /api/auth/users:
+ *  post:
+ *      tags:
+ *      - User
+ *      summary: User register
+ *      description: Register a new user
+ *      requestBody:
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: "#/components/schemas/user"
+ *      responses:
+ *          '200':
+ *              description: Returns the inserted object
+ *          '401':
+ *              description: Validation error
+ */
 router.post("/users", validatorRegisterUser, registerUserCtrl)
 
 

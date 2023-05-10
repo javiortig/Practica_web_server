@@ -14,7 +14,7 @@ const validatorCreateWebpage = [
 ]
 
 const validatorUpdateWebpage = [
-    param('id').exists().notEmpty().isNumeric(),
+    param('webpage_id').exists().notEmpty().isNumeric(),
     check("city").optional().notEmpty().isLength( {min:3, max: 100} ),
     check('interests.*').not().exists().withMessage('`interests` field not allowed'), // Me pego un tiro antes que hacer esto
     check("title").optional().notEmpty().isLength( {min:3, max: 100} ),
@@ -25,7 +25,7 @@ const validatorUpdateWebpage = [
 ]
 
 const validatorGetWebpage = [
-    param('id').exists().notEmpty().isNumeric(),
+    param('webpage_id').exists().notEmpty().isNumeric(),
     (req, res, next) => {
         return validateResults(req, res, next)
     }
@@ -40,8 +40,8 @@ const validatorgetWebpageByCityActivity = [
 ]
 
 const validatorCreateReview = [
-    param('id').exists().notEmpty().isNumeric(),
-    check("content").exists().notEmpty().isLength( {min:3, max: 10000} ),
+    param('webpage_id').exists().notEmpty().isNumeric(),
+    check("content").optional().notEmpty().isLength( {min:3, max: 10000} ),
     check('score').exists().isInt({ min: 0, max: 5 }).withMessage('`score` must be an integer between 0 and 5'),
     (req, res, next) => {
         return validateResults(req, res, next)

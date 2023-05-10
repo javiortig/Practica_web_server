@@ -137,7 +137,23 @@ const deleteUserCtrl = async (req, res) => {
 }
 
 
+/**
+ * Devuelve todos los clientes que reciben ofertas de una página
+ * @param {*} req 
+ * @param {*} res 
+ */
+const getClientsCtrl = async (req, res) => {
+    try {
+        const {webpage} = matchedData(req)
+
+        const clients = await usersModel.findAll({where: {city: webpage.city}});
+
+        res.send(clients)
+        
+    }catch(err){
+        handleHttpError(res, 'ERROR_GET_USER')
+    }
+}
 
 
-
-module.exports = { deleteUserCtrl, updateUserCtrl, getUserCtrl, getMerchantsCtrl }
+module.exports = { deleteUserCtrl, updateUserCtrl, getUserCtrl, getMerchantsCtrl, getClientsCtrl }

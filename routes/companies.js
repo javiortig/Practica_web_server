@@ -9,7 +9,34 @@ const {authMiddleware, ownsCompanyMiddleware} = require("../middleware/session")
 const {deleteUserCtrl, updateMerchantCtrl} = require('../controllers/companies')
 
 
-// Modificar los datos de una compañía existente. Lo puede hacer tanto un admin como su dueño
+/**
+ * @openapi
+ * /api/companies/{id}:
+ *  put:
+ *      tags:
+ *      - Company
+ *      summary: Update a company
+ *      description: Update a user by an admin
+ *      parameters:
+ *          -   name: id
+ *              in: path
+ *              description: id of the company that need to be updated
+ *              required: true
+ *              schema:
+ *                  type: integer
+ *      requestBody:
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: "#/components/schemas/company"
+ *      responses:
+ *          '200':
+ *              description: Returns the updated object
+ *          '401':
+ *              description: Validation error
+ *      security:
+ *          - bearerAuth: []
+ */
 router.put("/:id", authMiddleware, checkRol(["admin", "merchant"]), ownsCompanyMiddleware, validatorUpdateCompany, )
 
 

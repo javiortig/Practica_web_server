@@ -30,8 +30,8 @@ const getWebpagesCtrl = async (req, res) => {
  */
 const getWebpageCtrl = async (req, res) => {
     try {
-        const {id} = matchedData(req)
-        const webpage = await webpageModel.findOne({where: {id: id}});
+        const {webpage_id} = matchedData(req)
+        const webpage = await webpageModel.findOne({where: {id: webpage_id}});
 
         if (!webpage){
             handleHttpError(res, 'NOT FOUND', 404)
@@ -51,7 +51,7 @@ const getWebpageCtrl = async (req, res) => {
  */
 const getWebpageByCityActivityCtrl = async (req, res) => {
     try {
-        const {id, city, activity} = matchedData(req)
+        const {city, activity} = matchedData(req)
         let webpages = null;
         // Si no hay activity, buscar solo por ciudad, sino por ambas
         if (activity){
@@ -142,9 +142,9 @@ const createWebpageCtrl = async (req, res) => {
  */
 const updateWebpageCtrl = async (req, res) => {
     try {
-        const {id, ...body} = matchedData(req)
+        const {...body} = matchedData(req)
 
-        const target_webpage = await webpageModel.findOne({where: {id: id}});
+        const target_webpage = req.webpage;
 
         if (!target_webpage){
             handleHttpError(res, 'WEBPAGE_NOT_FOUND', 404)
@@ -165,9 +165,10 @@ const updateWebpageCtrl = async (req, res) => {
  */
 const createReviewCtrl = async (req, res) => {
     try {
-        const {id, user, content, score} = matchedData(req)
+        const user = req.user;
+        const {webpage_id, content, score} = matchedData(req)
 
-        let target_webpage = await webpageModel.findOne({where: {id: id}});
+        let target_webpage = await webpageModel.findOne({where: {id: webpage_id}});
         if (!target_webpage){
             handleHttpError(res, 'WEBPAGE_NOT_FOUND', 404)
         }
@@ -176,8 +177,8 @@ const createReviewCtrl = async (req, res) => {
         const review = await reviewsModel.create({
             score: score,
             content: (content)? content : null,
-            webpageId: id,
-            userId: user.id
+            webpage_id: webpage_id,
+            user_id: user.id
         })
 
         // Modificamos el score de la pagina tras esta review
@@ -189,7 +190,7 @@ const createReviewCtrl = async (req, res) => {
         res.send(review)
         
     }catch(err){
-        handleHttpError(res, 'ERROR_UPDATE_WEBPAGE')
+        handleHttpError(res, 'ERROR_CREATING_REVIEW')
     }
 }
 
