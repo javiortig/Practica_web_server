@@ -95,38 +95,26 @@ const createWebpageCtrl = async (req, res) => {
 
         body.company_id = user.owns_company_id
 
-        // Guardamos los intereses en sus respectivas arrays
-        let temp_interests = []
-        body.interests.forEach(interest => {
-            temp_interests.push({
-                name: interest,
-                webpage_interests:{
-                    selfGranted: true
+        let dataWebpage = await webpageModel.create(body)
+
+        if (body.interests){
+            const interestRecords = await Promise.all(body.interests.map(async (interestName) => {
+                let interest = await interestsModel.findOne({
+                where: { name: interestName },
+                });
+            
+                if (!interest) {
+                interest = await interestsModel.create({
+                    name: interestName,
+                });
                 }
-            });
-        });
-        body.interests = temp_interests
-        
-        console.log(body)
+            
+                return interest;
+            }));
 
-        const dataWebpage = await webpageModel.create(body)
+            dataWebpage = await dataWebpage.addInterests(interestRecords)
 
-        /*
-        // En la tabla de intereses, se insertan nuevos si estos no existen
-        const interest_bulk_array = body.interests.map((name) => ({ name }))
-        const interests = interestsModel.bulkCreate(interest_bulk_array)
-
-        // Ahora insertamos en la tabla webpage_interests las relaciones entre intereses y webpages
-        let n_n_interests_bulk_array = []
-        body.interests.forEach(interest => {
-            n_n_interests_bulk_array.push(
-                {
-                    interestName: interest,
-                    webpageId: dataWebpage.id
-                }
-            )
-        });
-        */
+        }
 
 
         res.send(dataWebpage)  

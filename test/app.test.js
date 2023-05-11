@@ -1,5 +1,6 @@
 const request = require('supertest');
 const app = require('../app')
+require("dotenv").config();
 
 let admin_token = null
 let admin_id = null
@@ -21,8 +22,8 @@ describe('Admin', () => {
         const response = await request(app)
             .post('/api/auth/login')
             .send({
-                "email": "admin@gmail.com",
-                "password": "Admin1234!!"
+                "email": process.env.TEST_ADMIN_USERNAME,
+                "password": process.env.TEST_ADMIN_PASSWORD
                 
             })
             .set('Accept', 'application/json')

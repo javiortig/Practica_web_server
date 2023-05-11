@@ -2,7 +2,7 @@ const { matchedData } = require("express-validator")
 const { tokenSign } = require("../utils/handleJwt")
 const { encrypt, compare } = require("../utils/handlePassword")
 const {handleHttpError} = require("../utils/handleError")
-const {usersModel, companyModel} = require("../models")
+const {usersModel, companyModel, interestsModel} = require("../models")
 
 /**
  * Encargado de hacer login del usuario
@@ -54,6 +54,24 @@ const registerUserCtrl = async (req, res) => {
         const password = await encrypt(req.password)
         const body = {...req, password, owns_company_id: null} 
         const dataUser = await usersModel.create(body)
+
+        if(req.interests){
+            const interestRecords = await Promise.all(req.interests.map(async (interestName) => {
+                let interest = await interestsModel.findOne({
+                where: { name: interestName },
+                });
+            
+                if (!interest) {
+                interest = await interestsModel.create({
+                    name: interestName,
+                });
+                }
+            
+                return interest;
+            }));
+
+            interestData = await dataUser.addInterests(interestRecords)
+        }
 
         // Esto por seguridad, ya no hace falta que viaje la password entonces la quito 
         dataUser.set('password', undefined, { strict: false }) 

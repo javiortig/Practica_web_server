@@ -8,13 +8,10 @@ const loggerStream = require("./utils/handleLogger")
 const { sequelize, dbConnectMySql } = require("./config/mysql")
 
 /*
-    LISTA DE TODO POR ORDEN DE IMPORTANCIA:
-    - Dejar Swagger funcionando. (mirar apuntes).
-    - Pruebas automaticas con Jest.
-    - Probar que las imagenes y tal funcionen, tanto al subirlas, actualizar... como al get de las paginas que devuelva las urls
-    - Añadir que ordene las webpages por score
-
-    - En consecuencia al punto 3, añadir un endpoint para borrar imagenes
+    TODOS de funcionalidad adicional:
+    - Endpoint ordene las webpages por score
+    - Endpoint devuelva usuarios por actividad
+    - Endpoint devuelva clientes por actividad y ciudad
 */
 
 const app = express() 
