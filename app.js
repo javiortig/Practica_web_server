@@ -17,12 +17,6 @@ const { sequelize, dbConnectMySql } = require("./config/mysql")
     - En consecuencia al punto 3, añadir un endpoint para borrar imagenes
 */
 
-// Esto se borra luego, es para testear. Se deberá incluir en los controllers
-const { interestsModel } = require('./models/')
-const { reviewsModel } = require('./models/')
-const { companyModel } = require('./models/')
-const { usersModel } = require('./models/')
-
 const app = express() 
 
 //Le decimos a la app de express() que use cors para evitar el error Cross-Domain (XD)

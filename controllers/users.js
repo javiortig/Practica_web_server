@@ -98,6 +98,7 @@ const updateUserCtrl = async (req, res) => {
  */
 const deleteUserCtrl = async (req, res) => {
     try {
+        console.log("ENTRO DELETE")
         const {id} = matchedData(req)
         const user = req.user
         const target_user = await usersModel.findOne({where: {id: id}});
@@ -128,8 +129,11 @@ const deleteUserCtrl = async (req, res) => {
                 break;
         }
 
-        target_user.destroy()
-        res.send(target_user)
+        console.log("llego a destroy()")
+        const result = target_user.destroy()
+        console.log("result")
+        console.log(result)
+        res.send(result)
         
     }catch(err){
         handleHttpError(res, 'ERROR_DELETE_USER')

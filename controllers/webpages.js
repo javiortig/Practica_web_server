@@ -52,6 +52,7 @@ const getWebpageCtrl = async (req, res) => {
 const getWebpageByCityActivityCtrl = async (req, res) => {
     try {
         const {city, activity} = matchedData(req)
+
         let webpages = null;
         // Si no hay activity, buscar solo por ciudad, sino por ambas
         if (activity){
@@ -70,14 +71,14 @@ const getWebpageByCityActivityCtrl = async (req, res) => {
             webpages = await webpageModel.findAll({where: {city: city}})
         }
 
-        if (!webpage){
+        if (!webpages){
             handleHttpError(res, 'NOT FOUND', 404)
         }
 
-        res.send(webpage)
+        res.send(webpages)
         
     }catch(err){
-        handleHttpError(res, 'ERROR_GET_USER')
+        handleHttpError(res, 'ERROR_GET_WEBPAGES_FILTERED')
     }
 }
 

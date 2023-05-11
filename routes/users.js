@@ -6,6 +6,8 @@ const {validatorUpdateUser, validatorGetUser, validatorDeleteUser, validatorGetC
 const {checkRol} = require("../middleware/rol")
 const {authMiddleware, ownsWebpageMiddleware} = require("../middleware/session")
 
+const pruebasMiddleware = require('../middleware/pruebas')
+
 const {deleteUserCtrl, updateUserCtrl, getUserCtrl, getMerchantsCtrl, getClientsCtrl} = require('../controllers/users')
 
 /**
@@ -134,6 +136,6 @@ router.put("/id/:id", authMiddleware, validatorUpdateUser, updateUserCtrl)
  *      security:
  *          - bearerAuth: []
  */
-router.delete("/id/:id", authMiddleware, validatorDeleteUser, deleteUserCtrl)
+router.delete("/id/:id",authMiddleware, validatorDeleteUser, pruebasMiddleware, deleteUserCtrl)
 
 module.exports = router

@@ -53,7 +53,6 @@ const ownsWebpageMiddleware = async (req, res, next) => {
                 handleHttpError(res, "USER_NOT_OWN_WEBPAGE", 403)
             }
 
-            console.log("Entro 4")
 
         }
 

@@ -1,0 +1,442 @@
+
+> practica_web_server@1.0.0 test
+> jest --forceExit
+
+  console.log
+    Servidor escuchando en el puerto 3000
+
+      at Server.log (app.js:45:13)
+
+  console.log
+    { email: 'admin@gmail.com', password: 'Admin1234!!' }
+
+      at log (controllers/auth.js:15:17)
+
+  console.log
+    Executing (default): SELECT 1+1 AS result
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'reviews' AND TABLE_SCHEMA = 'practica_web_server'
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    MySQL conexión correcta
+
+      at log (config/mysql.js:21:17)
+
+  console.log
+    Executing (default): SELECT `id`, `name`, `age`, `email`, `password`, `role`, `city`, `accepts_offers`, `owns_company_id`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`email` = 'admin@gmail.com' LIMIT 1;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): SHOW FULL COLUMNS FROM `reviews`;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+          at async Promise.all (index 0)
+
+  console.log
+    Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'reviews' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='practica_web_server' AND REFERENCED_TABLE_NAME IS NOT NULL;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+          at async Promise.all (index 1)
+
+  console.log
+    Executing (default): ALTER TABLE `reviews` CHANGE `score` `score` INTEGER;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): ALTER TABLE `reviews` CHANGE `content` `content` VARCHAR(255);
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): SELECT `id`, `name`, `age`, `email`, `password`, `role`, `city`, `accepts_offers`, `owns_company_id`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`id` = 1;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): ALTER TABLE `reviews` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): INSERT INTO `users` (`id`,`name`,`age`,`email`,`password`,`role`,`city`,`accepts_offers`,`createdAt`,`updatedAt`) VALUES (DEFAULT,?,?,?,?,?,?,?,?,?);
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): INSERT INTO `companies` (`id`,`name`,`cif`,`address`,`email`,`phone`,`owner_id`,`createdAt`,`updatedAt`) VALUES (DEFAULT,?,?,?,?,?,?,?,?);
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): ALTER TABLE `reviews` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): UPDATE `users` SET `owns_company_id`=?,`updatedAt`=? WHERE `id` = ?
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='reviews' AND constraint_name = 'reviews_ibfk_237' AND TABLE_SCHEMA = 'practica_web_server';
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): ALTER TABLE `reviews` DROP FOREIGN KEY `reviews_ibfk_237`;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): SELECT `id`, `name`, `age`, `email`, `password`, `role`, `city`, `accepts_offers`, `owns_company_id`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`id` = 1;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): SELECT `id`, `name`, `age`, `email`, `password`, `role`, `city`, `accepts_offers`, `owns_company_id`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`id` = 225;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): ALTER TABLE `reviews` ADD FOREIGN KEY (`webpage_id`) REFERENCES `webpages` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    {
+      city: 'Madrid',
+      interests: [
+        { name: 'comida', webpage_interests: [Object] },
+        { name: 'bebida', webpage_interests: [Object] },
+        { name: 'pizza', webpage_interests: [Object] }
+      ],
+      title: 'Telepizza Echeverría',
+      summary: 'a comer bocatas',
+      company_id: 62
+    }
+
+      at log (controllers/webpages.js:110:17)
+
+  console.log
+    Executing (default): INSERT INTO `webpages` (`id`,`city`,`title`,`summary`,`scoring`,`scoring_count`,`company_id`,`createdAt`,`updatedAt`) VALUES (DEFAULT,?,?,?,?,?,?,?,?);
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='reviews' AND constraint_name = 'reviews_ibfk_238' AND TABLE_SCHEMA = 'practica_web_server';
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): ALTER TABLE `reviews` DROP FOREIGN KEY `reviews_ibfk_238`;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): SELECT `id`, `name`, `age`, `email`, `password`, `role`, `city`, `accepts_offers`, `owns_company_id`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`id` = 225;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): ALTER TABLE `reviews` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): SELECT `id`, `city`, `title`, `summary`, `scoring`, `scoring_count`, `company_id`, `createdAt`, `updatedAt`, `companyId` FROM `webpages` AS `webpage` WHERE `webpage`.`id` = '55';
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): SELECT `id`, `name`, `cif`, `address`, `email`, `phone`, `owner_id`, `createdAt`, `updatedAt` FROM `companies` AS `company` WHERE `company`.`id` = 62;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): UPDATE `webpages` SET `city`=?,`updatedAt`=? WHERE `id` = ?
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): INSERT INTO `users` (`id`,`name`,`age`,`email`,`password`,`role`,`city`,`accepts_offers`,`owns_company_id`,`createdAt`,`updatedAt`) VALUES (DEFAULT,?,?,?,?,?,?,?,?,?,?);
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): SHOW INDEX FROM `reviews`
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'users' AND TABLE_SCHEMA = 'practica_web_server'
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): SHOW FULL COLUMNS FROM `users`;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+          at async Promise.all (index 0)
+
+  console.log
+    Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'users' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='practica_web_server' AND REFERENCED_TABLE_NAME IS NOT NULL;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+          at async Promise.all (index 1)
+
+  console.log
+    Executing (default): ALTER TABLE `users` CHANGE `name` `name` VARCHAR(255) NOT NULL;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): ALTER TABLE `users` CHANGE `age` `age` INTEGER;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): INSERT INTO `users` (`id`,`name`,`age`,`email`,`password`,`role`,`city`,`accepts_offers`,`owns_company_id`,`createdAt`,`updatedAt`) VALUES (DEFAULT,?,?,?,?,?,?,?,?,?,?);
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): ALTER TABLE `users` CHANGE `email` `email` VARCHAR(255) NOT NULL;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): SELECT `id`, `name`, `age`, `email`, `password`, `role`, `city`, `accepts_offers`, `owns_company_id`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`id` = 226;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): ALTER TABLE `users` CHANGE `password` `password` VARCHAR(255) NOT NULL;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): SELECT `id`, `city`, `title`, `summary`, `scoring`, `scoring_count`, `company_id`, `createdAt`, `updatedAt`, `companyId` FROM `webpages` AS `webpage` WHERE `webpage`.`id` = '55';
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): INSERT INTO `reviews` (`id`,`score`,`content`,`createdAt`,`updatedAt`,`webpage_id`,`user_id`) VALUES (DEFAULT,?,?,?,?,?,?);
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): ALTER TABLE `users` CHANGE `role` `role` ENUM('user', 'merchant', 'admin') DEFAULT 'user';
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): UPDATE `webpages` SET `scoring`=?,`scoring_count`=?,`updatedAt`=? WHERE `id` = ?
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): ALTER TABLE `users` CHANGE `city` `city` VARCHAR(255) NOT NULL;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): SELECT `id`, `name`, `age`, `email`, `password`, `role`, `city`, `accepts_offers`, `owns_company_id`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`id` = 226;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): ALTER TABLE `users` CHANGE `accepts_offers` `accepts_offers` TINYINT(1) DEFAULT true;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): SELECT `id`, `city`, `title`, `summary`, `scoring`, `scoring_count`, `company_id`, `createdAt`, `updatedAt`, `companyId` FROM `webpages` AS `webpage` WHERE `webpage`.`id` = '55';
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): INSERT INTO `reviews` (`id`,`score`,`content`,`createdAt`,`updatedAt`,`webpage_id`,`user_id`) VALUES (DEFAULT,?,?,?,?,?,?);
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='users' AND constraint_name = 'users_ibfk_1' AND TABLE_SCHEMA = 'practica_web_server';
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): ALTER TABLE `users` DROP FOREIGN KEY `users_ibfk_1`;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): UPDATE `webpages` SET `scoring`=?,`scoring_count`=?,`updatedAt`=? WHERE `id` = ?
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): ALTER TABLE `users` ADD FOREIGN KEY (`owns_company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): SELECT `id`, `city`, `title`, `summary`, `scoring`, `scoring_count`, `company_id`, `createdAt`, `updatedAt`, `companyId` FROM `webpages` AS `webpage`;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): SELECT `id`, `city`, `title`, `summary`, `scoring`, `scoring_count`, `company_id`, `createdAt`, `updatedAt`, `companyId` FROM `webpages` AS `webpage` WHERE `webpage`.`id` = '55';
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): SELECT `id`, `city`, `title`, `summary`, `scoring`, `scoring_count`, `company_id`, `createdAt`, `updatedAt`, `companyId` FROM `webpages` AS `webpage` WHERE `webpage`.`city` = 'Malaga';
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): SELECT `id`, `name`, `age`, `email`, `password`, `role`, `city`, `accepts_offers`, `owns_company_id`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`id` = 1;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): SELECT `id`, `name`, `age`, `email`, `password`, `role`, `city`, `accepts_offers`, `owns_company_id`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`id` = 1;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Entro en las pruebas
+
+      at log (middleware/pruebas.js:7:17)
+
+  console.log
+    ENTRO DELETE
+
+      at log (controllers/users.js:101:17)
+
+  console.log
+    Executing (default): SELECT `id`, `name`, `age`, `email`, `password`, `role`, `city`, `accepts_offers`, `owns_company_id`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`id` = '226';
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    llego a destroy()
+
+      at log (controllers/users.js:132:17)
+
+  console.log
+    result
+
+      at log (controllers/users.js:134:17)
+
+  console.log
+    Promise { <pending> }
+
+      at log (controllers/users.js:135:17)
+
+  console.log
+    Executing (default): DELETE FROM `users` WHERE `id` = 226
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    JsonWebTokenError {
+      name: 'JsonWebTokenError',
+      message: 'jwt malformed'
+    }
+
+      at log (utils/handleJwt.js:29:17)
+
+  console.log
+    /api/users/id/227
+
+      at Object.log (test/app.test.js:300:17)
+
+  console.log
+    Executing (default): SELECT `id`, `name`, `age`, `email`, `password`, `role`, `city`, `accepts_offers`, `owns_company_id`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`id` = 227;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): ALTER TABLE `users` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Entro en las pruebas
+
+      at log (middleware/pruebas.js:7:17)
+
+  console.log
+    ENTRO DELETE
+
+      at log (controllers/users.js:101:17)
+
+  console.log
+    Executing (default): SELECT `id`, `name`, `age`, `email`, `password`, `role`, `city`, `accepts_offers`, `owns_company_id`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`id` = '227';
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): ALTER TABLE `users` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    llego a destroy()
+
+      at log (controllers/users.js:132:17)
+
+  console.log
+    result
+
+      at log (controllers/users.js:134:17)
+
+  console.log
+    Promise { <pending> }
+
+      at log (controllers/users.js:135:17)
+
+  console.log
+    Executing (default): DELETE FROM `users` WHERE `id` = 227
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+PASS test/app.test.js
+  Admin
+    ✓ should login as admin (194 ms)
+    ✓ should NOT register a new merchant (40 ms)
+    ✓ should register a new merchant from the admin user (143 ms)
+  Merchant
+    ✓ should NOT register a new webpage. Only a merchant can register his own webpage (13 ms)
+    ✓ should register a new webpage from merchant created above (117 ms)
+    ✓ should modify the webpage from merchant created above (24 ms)
+  User
+    ✓ should register a basic user (98 ms)
+    ✓ should NOT register a basic user. Password is insecure and no email provided (9 ms)
+    ✓ should register another basic user. (100 ms)
+    ✓ should create a review from user1 in the webpage created above (73 ms)
+    ✓ should create another review from user2 in the webpage created above with content (73 ms)
+  Webpage
+    ✓ should get all webpages (4 ms)
+    ✓ should get the webpage created above, which should have a review scoring of 3 and a review count of 2 (4 ms)
+    ✓ should get all webpages from Malaga (at least 1) (5 ms)
+  Deletes
+    ✓ should NEVER delete an admin (9 ms)
+    ✓ should delete user1 from admin (13 ms)
+    ✓ should NOT delete user from merchant (9 ms)
+    ✓ should delete user2 from himself (95 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       18 passed, 18 total
+Snapshots:   0 total
+Time:        2.738 s, estimated 4 s
+Ran all test suites.
+Force exiting Jest: Have you considered using `--detectOpenHandles` to detect async operations that kept running after all tests finished?
