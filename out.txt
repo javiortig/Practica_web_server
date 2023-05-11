@@ -5,7 +5,7 @@
   console.log
     Servidor escuchando en el puerto 3000
 
-      at Server.log (app.js:45:13)
+      at Server.log (app.js:42:13)
 
   console.log
     { email: 'admin@gmail.com', password: 'Admin1234!!' }
@@ -85,12 +85,12 @@
       at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
 
   console.log
-    Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='reviews' AND constraint_name = 'reviews_ibfk_237' AND TABLE_SCHEMA = 'practica_web_server';
+    Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='reviews' AND constraint_name = 'reviews_ibfk_361' AND TABLE_SCHEMA = 'practica_web_server';
 
       at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
 
   console.log
-    Executing (default): ALTER TABLE `reviews` DROP FOREIGN KEY `reviews_ibfk_237`;
+    Executing (default): ALTER TABLE `reviews` DROP FOREIGN KEY `reviews_ibfk_361`;
 
       at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
 
@@ -100,29 +100,14 @@
       at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
 
   console.log
-    Executing (default): SELECT `id`, `name`, `age`, `email`, `password`, `role`, `city`, `accepts_offers`, `owns_company_id`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`id` = 225;
-
-      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
-
-  console.log
     Executing (default): ALTER TABLE `reviews` ADD FOREIGN KEY (`webpage_id`) REFERENCES `webpages` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
       at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
 
   console.log
-    {
-      city: 'Madrid',
-      interests: [
-        { name: 'comida', webpage_interests: [Object] },
-        { name: 'bebida', webpage_interests: [Object] },
-        { name: 'pizza', webpage_interests: [Object] }
-      ],
-      title: 'Telepizza Echeverría',
-      summary: 'a comer bocatas',
-      company_id: 62
-    }
+    Executing (default): SELECT `id`, `name`, `age`, `email`, `password`, `role`, `city`, `accepts_offers`, `owns_company_id`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`id` = 244;
 
-      at log (controllers/webpages.js:110:17)
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
 
   console.log
     Executing (default): INSERT INTO `webpages` (`id`,`city`,`title`,`summary`,`scoring`,`scoring_count`,`company_id`,`createdAt`,`updatedAt`) VALUES (DEFAULT,?,?,?,?,?,?,?,?);
@@ -130,19 +115,38 @@
       at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
 
   console.log
-    Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='reviews' AND constraint_name = 'reviews_ibfk_238' AND TABLE_SCHEMA = 'practica_web_server';
+    Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='reviews' AND constraint_name = 'reviews_ibfk_360' AND TABLE_SCHEMA = 'practica_web_server';
 
       at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
 
   console.log
-    Executing (default): ALTER TABLE `reviews` DROP FOREIGN KEY `reviews_ibfk_238`;
+    Executing (default): ALTER TABLE `reviews` DROP FOREIGN KEY `reviews_ibfk_360`;
 
       at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
 
   console.log
-    Executing (default): SELECT `id`, `name`, `age`, `email`, `password`, `role`, `city`, `accepts_offers`, `owns_company_id`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`id` = 225;
+    Executing (default): SELECT `name`, `createdAt`, `updatedAt` FROM `interests` AS `interests` WHERE `interests`.`name` = 'comida';
 
       at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+          at async Promise.all (index 0)
+
+  console.log
+    Executing (default): SELECT `name`, `createdAt`, `updatedAt` FROM `interests` AS `interests` WHERE `interests`.`name` = 'bebida';
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+          at async Promise.all (index 1)
+
+  console.log
+    Executing (default): SELECT `name`, `createdAt`, `updatedAt` FROM `interests` AS `interests` WHERE `interests`.`name` = 'pizza';
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+          at async Promise.all (index 2)
+
+  console.log
+    Executing (default): INSERT INTO `interests` (`name`,`createdAt`,`updatedAt`) VALUES (?,?,?);
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+          at async Promise.all (index 2)
 
   console.log
     Executing (default): ALTER TABLE `reviews` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
@@ -150,27 +154,28 @@
       at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
 
   console.log
-    Executing (default): SELECT `id`, `city`, `title`, `summary`, `scoring`, `scoring_count`, `company_id`, `createdAt`, `updatedAt`, `companyId` FROM `webpages` AS `webpage` WHERE `webpage`.`id` = '55';
+    Executing (default): SELECT `interestName`, `webpageId` FROM `webpage_interests` AS `webpage_interests` WHERE `webpage_interests`.`webpageId` = 66 AND `webpage_interests`.`interestName` IN ('comida', 'bebida', 'pizza');
 
       at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
 
   console.log
-    Executing (default): SELECT `id`, `name`, `cif`, `address`, `email`, `phone`, `owner_id`, `createdAt`, `updatedAt` FROM `companies` AS `company` WHERE `company`.`id` = 62;
+    Executing (default): INSERT INTO `webpage_interests` (`interestName`,`webpageId`) VALUES ('comida',66),('bebida',66),('pizza',66);
 
       at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+          at async Promise.all (index 0)
 
   console.log
-    Executing (default): UPDATE `webpages` SET `city`=?,`updatedAt`=? WHERE `id` = ?
-
-      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
-
-  console.log
-    Executing (default): INSERT INTO `users` (`id`,`name`,`age`,`email`,`password`,`role`,`city`,`accepts_offers`,`owns_company_id`,`createdAt`,`updatedAt`) VALUES (DEFAULT,?,?,?,?,?,?,?,?,?,?);
+    Executing (default): SELECT `id`, `name`, `age`, `email`, `password`, `role`, `city`, `accepts_offers`, `owns_company_id`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`id` = 244;
 
       at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
 
   console.log
     Executing (default): SHOW INDEX FROM `reviews`
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): INSERT INTO `users` (`id`,`name`,`age`,`email`,`password`,`role`,`city`,`accepts_offers`,`owns_company_id`,`createdAt`,`updatedAt`) VALUES (DEFAULT,?,?,?,?,?,?,?,?,?,?);
 
       at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
 
@@ -202,17 +207,12 @@
       at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
 
   console.log
-    Executing (default): INSERT INTO `users` (`id`,`name`,`age`,`email`,`password`,`role`,`city`,`accepts_offers`,`owns_company_id`,`createdAt`,`updatedAt`) VALUES (DEFAULT,?,?,?,?,?,?,?,?,?,?);
-
-      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
-
-  console.log
     Executing (default): ALTER TABLE `users` CHANGE `email` `email` VARCHAR(255) NOT NULL;
 
       at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
 
   console.log
-    Executing (default): SELECT `id`, `name`, `age`, `email`, `password`, `role`, `city`, `accepts_offers`, `owns_company_id`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`id` = 226;
+    Executing (default): INSERT INTO `users` (`id`,`name`,`age`,`email`,`password`,`role`,`city`,`accepts_offers`,`owns_company_id`,`createdAt`,`updatedAt`) VALUES (DEFAULT,?,?,?,?,?,?,?,?,?,?);
 
       at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
 
@@ -222,12 +222,7 @@
       at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
 
   console.log
-    Executing (default): SELECT `id`, `city`, `title`, `summary`, `scoring`, `scoring_count`, `company_id`, `createdAt`, `updatedAt`, `companyId` FROM `webpages` AS `webpage` WHERE `webpage`.`id` = '55';
-
-      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
-
-  console.log
-    Executing (default): INSERT INTO `reviews` (`id`,`score`,`content`,`createdAt`,`updatedAt`,`webpage_id`,`user_id`) VALUES (DEFAULT,?,?,?,?,?,?);
+    Executing (default): SELECT `id`, `name`, `age`, `email`, `password`, `role`, `city`, `accepts_offers`, `owns_company_id`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`id` = 245;
 
       at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
 
@@ -237,7 +232,7 @@
       at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
 
   console.log
-    Executing (default): UPDATE `webpages` SET `scoring`=?,`scoring_count`=?,`updatedAt`=? WHERE `id` = ?
+    Executing (default): SELECT `id`, `name`, `age`, `email`, `password`, `role`, `city`, `accepts_offers`, `owns_company_id`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`id` = 245;
 
       at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
 
@@ -247,52 +242,12 @@
       at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
 
   console.log
-    Executing (default): SELECT `id`, `name`, `age`, `email`, `password`, `role`, `city`, `accepts_offers`, `owns_company_id`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`id` = 226;
-
-      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
-
-  console.log
-    Executing (default): ALTER TABLE `users` CHANGE `accepts_offers` `accepts_offers` TINYINT(1) DEFAULT true;
-
-      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
-
-  console.log
-    Executing (default): SELECT `id`, `city`, `title`, `summary`, `scoring`, `scoring_count`, `company_id`, `createdAt`, `updatedAt`, `companyId` FROM `webpages` AS `webpage` WHERE `webpage`.`id` = '55';
-
-      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
-
-  console.log
-    Executing (default): INSERT INTO `reviews` (`id`,`score`,`content`,`createdAt`,`updatedAt`,`webpage_id`,`user_id`) VALUES (DEFAULT,?,?,?,?,?,?);
-
-      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
-
-  console.log
-    Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='users' AND constraint_name = 'users_ibfk_1' AND TABLE_SCHEMA = 'practica_web_server';
-
-      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
-
-  console.log
-    Executing (default): ALTER TABLE `users` DROP FOREIGN KEY `users_ibfk_1`;
-
-      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
-
-  console.log
-    Executing (default): UPDATE `webpages` SET `scoring`=?,`scoring_count`=?,`updatedAt`=? WHERE `id` = ?
-
-      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
-
-  console.log
-    Executing (default): ALTER TABLE `users` ADD FOREIGN KEY (`owns_company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
-
-  console.log
     Executing (default): SELECT `id`, `city`, `title`, `summary`, `scoring`, `scoring_count`, `company_id`, `createdAt`, `updatedAt`, `companyId` FROM `webpages` AS `webpage`;
 
       at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
 
   console.log
-    Executing (default): SELECT `id`, `city`, `title`, `summary`, `scoring`, `scoring_count`, `company_id`, `createdAt`, `updatedAt`, `companyId` FROM `webpages` AS `webpage` WHERE `webpage`.`id` = '55';
+    Executing (default): ALTER TABLE `users` CHANGE `accepts_offers` `accepts_offers` TINYINT(1) DEFAULT true;
 
       at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
 
@@ -307,7 +262,22 @@
       at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
 
   console.log
+    Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='users' AND constraint_name = 'users_ibfk_1' AND TABLE_SCHEMA = 'practica_web_server';
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): ALTER TABLE `users` DROP FOREIGN KEY `users_ibfk_1`;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
     Executing (default): SELECT `id`, `name`, `age`, `email`, `password`, `role`, `city`, `accepts_offers`, `owns_company_id`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`id` = 1;
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Executing (default): ALTER TABLE `users` ADD FOREIGN KEY (`owns_company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
       at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
 
@@ -322,7 +292,7 @@
       at log (controllers/users.js:101:17)
 
   console.log
-    Executing (default): SELECT `id`, `name`, `age`, `email`, `password`, `role`, `city`, `accepts_offers`, `owns_company_id`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`id` = '226';
+    Executing (default): SELECT `id`, `name`, `age`, `email`, `password`, `role`, `city`, `accepts_offers`, `owns_company_id`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`id` = '245';
 
       at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
 
@@ -342,7 +312,7 @@
       at log (controllers/users.js:135:17)
 
   console.log
-    Executing (default): DELETE FROM `users` WHERE `id` = 226
+    Executing (default): DELETE FROM `users` WHERE `id` = 245
 
       at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
 
@@ -355,17 +325,7 @@
       at log (utils/handleJwt.js:29:17)
 
   console.log
-    /api/users/id/227
-
-      at Object.log (test/app.test.js:300:17)
-
-  console.log
-    Executing (default): SELECT `id`, `name`, `age`, `email`, `password`, `role`, `city`, `accepts_offers`, `owns_company_id`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`id` = 227;
-
-      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
-
-  console.log
-    Executing (default): ALTER TABLE `users` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+    Executing (default): SELECT `id`, `name`, `age`, `email`, `password`, `role`, `city`, `accepts_offers`, `owns_company_id`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`id` = 246;
 
       at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
 
@@ -380,12 +340,7 @@
       at log (controllers/users.js:101:17)
 
   console.log
-    Executing (default): SELECT `id`, `name`, `age`, `email`, `password`, `role`, `city`, `accepts_offers`, `owns_company_id`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`id` = '227';
-
-      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
-
-  console.log
-    Executing (default): ALTER TABLE `users` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+    Executing (default): SELECT `id`, `name`, `age`, `email`, `password`, `role`, `city`, `accepts_offers`, `owns_company_id`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`id` = '246';
 
       at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
 
@@ -405,38 +360,176 @@
       at log (controllers/users.js:135:17)
 
   console.log
-    Executing (default): DELETE FROM `users` WHERE `id` = 227
+    Executing (default): DELETE FROM `users` WHERE `id` = 246
 
       at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
 
-PASS test/app.test.js
-  Admin
-    ✓ should login as admin (194 ms)
-    ✓ should NOT register a new merchant (40 ms)
-    ✓ should register a new merchant from the admin user (143 ms)
-  Merchant
-    ✓ should NOT register a new webpage. Only a merchant can register his own webpage (13 ms)
-    ✓ should register a new webpage from merchant created above (117 ms)
-    ✓ should modify the webpage from merchant created above (24 ms)
-  User
-    ✓ should register a basic user (98 ms)
-    ✓ should NOT register a basic user. Password is insecure and no email provided (9 ms)
-    ✓ should register another basic user. (100 ms)
-    ✓ should create a review from user1 in the webpage created above (73 ms)
-    ✓ should create another review from user2 in the webpage created above with content (73 ms)
-  Webpage
-    ✓ should get all webpages (4 ms)
-    ✓ should get the webpage created above, which should have a review scoring of 3 and a review count of 2 (4 ms)
-    ✓ should get all webpages from Malaga (at least 1) (5 ms)
-  Deletes
-    ✓ should NEVER delete an admin (9 ms)
-    ✓ should delete user1 from admin (13 ms)
-    ✓ should NOT delete user from merchant (9 ms)
-    ✓ should delete user2 from himself (95 ms)
+  console.log
+    Executing (default): SELECT `id`, `name`, `age`, `email`, `password`, `role`, `city`, `accepts_offers`, `owns_company_id`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`id` = 244;
 
-Test Suites: 1 passed, 1 total
-Tests:       18 passed, 18 total
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    Entro en las pruebas
+
+      at log (middleware/pruebas.js:7:17)
+
+  console.log
+    ENTRO DELETE
+
+      at log (controllers/users.js:101:17)
+
+  console.log
+    Executing (default): SELECT `id`, `name`, `age`, `email`, `password`, `role`, `city`, `accepts_offers`, `owns_company_id`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`id` = '244';
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+  console.log
+    llego a destroy()
+
+      at log (controllers/users.js:132:17)
+
+  console.log
+    result
+
+      at log (controllers/users.js:134:17)
+
+  console.log
+    Promise { <pending> }
+
+      at log (controllers/users.js:135:17)
+
+  console.log
+    Executing (default): DELETE FROM `users` WHERE `id` = 244
+
+      at Sequelize.log (node_modules/sequelize/src/sequelize.js:1280:15)
+
+FAIL test/app.test.js
+  Admin
+    ✓ should login as admin (198 ms)
+    ✓ should NOT register a new merchant (40 ms)
+    ✓ should register a new merchant from the admin user (127 ms)
+  Merchant
+    ✓ should NOT register a new webpage. Only a merchant can register his own webpage (10 ms)
+    ✕ should register a new webpage from merchant created above (161 ms)
+    ✕ should modify the webpage from merchant created above (10 ms)
+  User
+    ✓ should register a basic user (89 ms)
+    ✓ should NOT register a basic user. Password is insecure and no email provided (12 ms)
+    ✓ should register another basic user. (106 ms)
+    ✕ should create a review from user1 in the webpage created above (22 ms)
+    ✕ should create another review from user2 in the webpage created above with content (16 ms)
+  Webpage
+    ✓ should get all webpages (8 ms)
+    ✕ should get the webpage created above, which should have a review scoring of 3 and a review count of 2 (6 ms)
+    ✓ should get all webpages from Malaga (at least 1) (6 ms)
+  Deletes
+    ✓ should NEVER delete an admin (16 ms)
+    ✓ should delete user1 from admin (34 ms)
+    ✓ should NOT delete user from merchant (9 ms)
+    ✓ should delete user2 from himself (12 ms)
+    ✓ should delete merchant from himself (11 ms)
+
+  ● Merchant › should register a new webpage from merchant created above
+
+    expect(received).toEqual(expected) // deep equality
+
+    Expected: "Madrid"
+    Received: undefined
+
+      117 |             .expect(200)
+      118 |
+    > 119 |             expect(response.body.city).toEqual('Madrid');
+          |                                        ^
+      120 |
+      121 |             webpage_id = response.body.id
+      122 |     });
+
+      at Object.toEqual (test/app.test.js:119:40)
+
+  ● Merchant › should modify the webpage from merchant created above
+
+    expected 200 "OK", got 403 "Forbidden"
+
+      130 |             })
+      131 |             .set('Accept', 'application/json')
+    > 132 |             .expect(200)
+          |              ^
+      133 |
+      134 |             expect(response.body.city).toEqual('Malaga');
+      135 |
+
+      at Object.expect (test/app.test.js:132:14)
+      ----
+      at Test._assertStatus (node_modules/supertest/lib/test.js:252:14)
+      at node_modules/supertest/lib/test.js:308:13
+      at Test._assertFunction (node_modules/supertest/lib/test.js:285:13)
+      at Test.assert (node_modules/supertest/lib/test.js:164:23)
+      at Server.localAssert (node_modules/supertest/lib/test.js:120:14)
+
+  ● User › should create a review from user1 in the webpage created above
+
+    expected 200 "OK", got 403 "Forbidden"
+
+      211 |             })
+      212 |             .set('Accept', 'application/json')
+    > 213 |             .expect(200)
+          |              ^
+      214 |
+      215 |             expect(response.text).toBeDefined();
+      216 |
+
+      at Object.expect (test/app.test.js:213:14)
+      ----
+      at Test._assertStatus (node_modules/supertest/lib/test.js:252:14)
+      at node_modules/supertest/lib/test.js:308:13
+      at Test._assertFunction (node_modules/supertest/lib/test.js:285:13)
+      at Test.assert (node_modules/supertest/lib/test.js:164:23)
+      at Server.localAssert (node_modules/supertest/lib/test.js:120:14)
+
+  ● User › should create another review from user2 in the webpage created above with content
+
+    expected 200 "OK", got 403 "Forbidden"
+
+      227 |             })
+      228 |             .set('Accept', 'application/json')
+    > 229 |             .expect(200)
+          |              ^
+      230 |
+      231 |             expect(response.text).toBeDefined();
+      232 |
+
+      at Object.expect (test/app.test.js:229:14)
+      ----
+      at Test._assertStatus (node_modules/supertest/lib/test.js:252:14)
+      at node_modules/supertest/lib/test.js:308:13
+      at Test._assertFunction (node_modules/supertest/lib/test.js:285:13)
+      at Test.assert (node_modules/supertest/lib/test.js:164:23)
+      at Server.localAssert (node_modules/supertest/lib/test.js:120:14)
+
+  ● Webpage › should get the webpage created above, which should have a review scoring of 3 and a review count of 2
+
+    expected 200 "OK", got 403 "Forbidden"
+
+      249 |             .get('/api/webpages/id/' + webpage_id)
+      250 |             .set('Accept', 'application/json')
+    > 251 |             .expect(200)
+          |              ^
+      252 |
+      253 |             expect(response.body.scoring).toEqual(3)
+      254 |             expect(response.body.scoring_count).toEqual(2)
+
+      at Object.expect (test/app.test.js:251:14)
+      ----
+      at Test._assertStatus (node_modules/supertest/lib/test.js:252:14)
+      at node_modules/supertest/lib/test.js:308:13
+      at Test._assertFunction (node_modules/supertest/lib/test.js:285:13)
+      at Test.assert (node_modules/supertest/lib/test.js:164:23)
+      at Server.localAssert (node_modules/supertest/lib/test.js:120:14)
+
+Test Suites: 1 failed, 1 total
+Tests:       5 failed, 14 passed, 19 total
 Snapshots:   0 total
-Time:        2.738 s, estimated 4 s
+Time:        2.57 s, estimated 3 s
 Ran all test suites.
 Force exiting Jest: Have you considered using `--detectOpenHandles` to detect async operations that kept running after all tests finished?

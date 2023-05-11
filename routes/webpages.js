@@ -75,7 +75,7 @@ router.get("/id/:webpage_id", validatorGetWebpage,getWebpageCtrl)
  *      security:
  *          - bearerAuth: []
  */
-router.get("/search/:city", validatorgetWebpageByCityActivity,getWebpageByCityActivityCtrl)
+router.get("/search/:city", validatorgetWebpageByCityActivity, getWebpageByCityActivityCtrl)
 
 /**
  * @openapi

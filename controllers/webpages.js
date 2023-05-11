@@ -96,7 +96,8 @@ const createWebpageCtrl = async (req, res) => {
         body.company_id = user.owns_company_id
 
         let dataWebpage = await webpageModel.create(body)
-
+        console.log("body.interests")
+        console.log(body.interests)
         if (body.interests){
             const interestRecords = await Promise.all(body.interests.map(async (interestName) => {
                 let interest = await interestsModel.findOne({
@@ -112,7 +113,7 @@ const createWebpageCtrl = async (req, res) => {
                 return interest;
             }));
 
-            dataWebpage = await dataWebpage.addInterests(interestRecords)
+            const dataWebpage_interests = await dataWebpage.addInterests(interestRecords)
 
         }
 
