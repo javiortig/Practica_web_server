@@ -27,7 +27,7 @@ const {loginCtrl, registerUserCtrl, registerMerchantCtrl, updateMerchantCtrl} = 
  *          content:
  *              application/json:
  *                  schema:
- *                      $ref: "#/components/schemas/login"
+ *                      $ref: "#/components/schemas/User"
  *      responses:
  *          '200':
  *              description: Returns the JWT for authentification
@@ -48,7 +48,7 @@ router.post("/login", validatorLogin, loginCtrl)
  *          content:
  *              application/json:
  *                  schema:
- *                      $ref: "#/components/schemas/user"
+ *                      $ref: "#/components/schemas/User"
  *      responses:
  *          '200':
  *              description: Returns the inserted object
@@ -69,7 +69,7 @@ router.post("/merchant", authMiddleware, checkRol(["admin"]), validatorRegisterM
  *          content:
  *              application/json:
  *                  schema:
- *                      $ref: "#/components/schemas/user"
+ *                      $ref: "#/components/schemas/User"
  *      responses:
  *          '200':
  *              description: Returns the inserted object

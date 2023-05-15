@@ -10,7 +10,9 @@ CREATE UNIQUE INDEX email ON users (email);
 
 CREATE UNIQUE INDEX title ON webpages (title);
 
-# Deletes despues de cada jest
+#  Deletes despues de cada jest
+
+use practica_web_server;
 
 DELETE FROM webpages WHERE title = 'Telepizza Echeverría';
 delete from users where email = 'telepizza@gmail.com';

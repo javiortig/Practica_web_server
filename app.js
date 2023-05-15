@@ -32,10 +32,11 @@ morganBody(app, { //Para ver las distintas configuraciones que podemos pasarle e
     stream: loggerStream
 })
 
-//app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs))
-
 
 app.use("/api", require("./routes")) //Lee routes/index.js por defecto
+
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs))
 
 const port = process.env.PORT || 3000
 app.listen(port, () => {

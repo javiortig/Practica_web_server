@@ -72,7 +72,7 @@ router.get("/merchants", authMiddleware, checkRol(["admin"]), getMerchantsCtrl)
  *          content:
  *              application/json:
  *                  schema:
- *                      $ref: "#/components/schemas/user"
+ *                      $ref: "#/components/schemas/User"
  *      responses:
  *          '200':
  *              description: Returns the object array
@@ -102,7 +102,7 @@ router.get("/clients/:webpage_id", authMiddleware, checkRol(["merchant"]), valid
  *          content:
  *              application/json:
  *                  schema:
- *                      $ref: "#/components/schemas/user"
+ *                      $ref: "#/components/schemas/User"
  *      responses:
  *          '200':
  *              description: Returns the updated object

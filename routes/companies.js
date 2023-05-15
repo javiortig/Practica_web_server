@@ -28,7 +28,7 @@ const {deleteUserCtrl, updateMerchantCtrl} = require('../controllers/companies')
  *          content:
  *              application/json:
  *                  schema:
- *                      $ref: "#/components/schemas/company"
+ *                      $ref: "#/components/schemas/Company"
  *      responses:
  *          '200':
  *              description: Returns the updated object

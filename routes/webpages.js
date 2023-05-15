@@ -120,7 +120,7 @@ router.get("/search/:city/:activity", validatorgetWebpageByCityActivity,getWebpa
  *          content:
  *              application/json:
  *                  schema:
- *                      $ref: "#/components/schemas/webpage"
+ *                      $ref: "#/components/schemas/Webpage"
  *      responses:
  *          '200':
  *              description: Returns the inserted object
@@ -148,7 +148,7 @@ router.post("/", authMiddleware, checkRol(["merchant"]), validatorCreateWebpage,
  *          content:
  *              application/json:
  *                  schema:
- *                      $ref: "#/components/schemas/webpage"
+ *                      $ref: "#/components/schemas/Webpage"
  *      responses:
  *          '200':
  *              description: Returns the updated object
@@ -178,7 +178,7 @@ router.put("/id/:webpage_id", authMiddleware, checkRol(["admin", "merchant"]), v
  *          content:
  *              application/json:
  *                  schema:
- *                      $ref: "#/components/schemas/webpage"
+ *                      $ref: "#/components/schemas/Review"
  *      responses:
  *          '200':
  *              description: Returns the review object

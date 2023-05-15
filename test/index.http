@@ -184,6 +184,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sZSI6I
 
 ### Get una webpage por ciudad y actividad
 
+GET http://localhost:3000/api/webpages/search/Malaga HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sZSI6InVzZXIiLCJpYXQiOjE2ODM3MzkwMTYsImV4cCI6MTY4Mzc1MzQxNn0.V2hn-1B_Z2p5HMvvK91qqz_B91Xh1n2ChaSA-t7cL5M
+
+### Get una webpage por ciudad y actividad
+
 GET http://localhost:3000/api/webpages/search/Malaga/bebida HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sZSI6InVzZXIiLCJpYXQiOjE2ODM3MzkwMTYsImV4cCI6MTY4Mzc1MzQxNn0.V2hn-1B_Z2p5HMvvK91qqz_B91Xh1n2ChaSA-t7cL5M
